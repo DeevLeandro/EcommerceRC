@@ -29,7 +29,7 @@ export default function Header() {
             </div>
             <div className="right-side">
               <img 
-                src="/images/banner.png" 
+                src="/images/Banner.png" 
                 alt="Ofertas de produtos" 
                 className="responsive-img" 
               />
