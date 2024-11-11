@@ -1,0 +1,1391 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --primeira-cor: #f80;
+  --seconda-cor: #00498d;
+  --primeiropreto: #e07800;
+  --segundopreto: #00315f;
+  --luzcor: #e9e9e9;
+  --corpreta: #2c2c2c;
+}
+
+body {
+  font-family: Arial;
+  color: var(--corpreta);
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+input {
+  border: none;
+  outline: none;
+}
+
+input[type="search"] {
+  border: none;
+  outline: none;
+}
+
+/* NAV */
+.nav {
+  background-color: #fff;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  left: 0;
+  box-shadow: 10px 0px 10px #ebebeb;
+  z-index: 1;
+}
+
+.nav .inner-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  max-width: 1300px;
+  margin-inline: auto;
+}
+
+.logo {
+  color: red;
+  font: bold;
+}
+
+.logo span {
+  color: var(--segundopreto);
+}
+
+/* Diminui o espaçamento entre os itens do menu */
+nav ul li {
+  list-style: none;
+  display: inline-block;
+  margin-right: 10px; /* Diminui o espaçamento lateral */
+  padding: 5px; /* Diminui o padding */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-weight: bolder;
+}
+
+/* Estilo do link para remover sublinhado e ajustar cor inicial */
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.3s ease;
+}
+
+/* Efeito hover no item de menu */
+nav ul li:hover {
+  background-color: #e0f7fa; /* Azul gelo */
+  border-radius: 5px; /* Bordas arredondadas para efeito mais suave */
+}
+
+/* Efeito de rotação nos ícones ao passar o mouse */
+nav ul li:hover a .fa-icon {
+  transform: rotate(360deg); /* Rotação completa */
+}
+
+/* Estilo do ícone do FontAwesome */
+.fa-icon {
+  transition: transform 0.5s ease; /* Animação suave */
+  color: #333;
+}
+
+/* Alteração da cor do link ao passar o mouse */
+nav ul li:hover a {
+  color: #007acc; /* Azul para contraste */
+}
+
+
+.navs-icon-conteiner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navs-icon-conteiner svg {
+  height: 1.5rem;
+}
+
+.navs-icon-conteiner .Shopping-Cart {
+  position: relative;
+}
+
+.navs-icon-conteiner .Shopping-Cart .produto-Count {
+  content: "";
+  position: absolute;
+  background-color: #f00;
+  width: 1rem;
+  height: 1rem;
+  bottom: -8px;
+  left: -8px;
+  border-radius: 50%;
+  color: #fff;
+  padding: 0.7rem;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Aumenta o tamanho do campo de pesquisa */
+.search-input-container {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--corpreta);
+  padding: 0.5rem;
+  margin-right: 1rem;
+}
+
+/* Aumenta a largura do input de pesquisa */
+.search-input-container input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  width: 200px; /* Ajuste o tamanho conforme necessário */
+}
+
+/* Se você quiser que o ícone de pesquisa também tenha um tamanho adequado */
+.search-input-container svg {
+  height: 1.5rem; /* Aumenta o ícone para acompanhar o tamanho do campo de pesquisa */
+  color: #808080;
+}
+
+nav ul li:hover {
+  transform: translateY(-4px);
+  transition: all 0.2s;
+  font-weight: bold;
+}
+
+.menu-button {
+  display: none;
+}
+
+/* END NAV */
+
+/* HEADER - Estilos Globais */
+header {
+  background-color: #fff;
+  overflow: hidden;
+  padding: 1rem;
+  height: 325px ;
+}
+
+header .banner-slide {
+  position: relative;
+}
+
+header .banner-slide .inner-content {
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #87CEEB, #4a90e2);
+  overflow: hidden;
+}
+
+header .banner-slide .left-side {
+  color: #fff;
+  max-width: 50%;
+  z-index: 2;
+}
+
+header .banner-slide .left-side h2 {
+  font-size: 2rem;
+  margin-left: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 400px;
+  margin-left: 20%;
+}
+
+
+header .banner-slide .right-side img {
+  width: 75%;
+  border-radius: 15px;
+  display: flex;
+ margin-bottom: 300px;
+ margin-left: 100px;
+}
+
+
+/* Botões do slide */
+.slider-arrows {
+  position: absolute;
+  top: 35%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-80%);
+  pointer-events: none;
+  
+}
+
+.arrow {
+  background: rgba(255, 255, 255, 0.137);
+  border: none;
+  border-radius: 15px;
+  padding: 20px;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background-color 0.2s;
+  font-size: 24px;
+  color: var(--seconda-cor);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow:hover {
+  background: rgba(255, 255, 255, 0.623);
+}
+
+/* Oculta os botões do slide em telas menores */
+@media (max-width: 768px) {
+  .slider-arrows {
+    display: none;
+  }
+}
+
+/* Responsividade NAV, HEADER */
+@media (max-width: 920px) {
+  .nav h1 {
+    font-size: 1.2rem;
+  }
+
+  header .banner-slide .inner-content {
+    gap: 2rem;
+    padding: 1.5rem;
+    padding-top: 3rem;
+  }
+
+  header .banner-slide .left-side h2 {
+    font-size: 1.8rem;
+  }
+
+  nav {
+    position: absolute;
+    top: 55px;
+    left: 0;
+    background-color: #fff;
+    width: 100%;
+    padding-bottom: 1rem;
+    display: none;
+  }
+
+  nav.show {
+    display: block;
+  }
+
+  nav ul {
+    flex-direction: column;
+  }
+
+  nav ul li {
+    text-align: center;
+    padding: 0.8rem;
+  }
+
+  .menu-button {
+    display: inline;
+  }
+}
+
+/* Responsividade para o header e conteúdo */
+@media (max-width: 920px) {
+  header .banner-slide .left-side h2 {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  header .banner-slide .left-side p {
+    font-size: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+    margin: 0 auto;
+    width: 90%;
+  }
+
+}
+
+@media (max-width: 768px) {
+  header .banner-slide .right-side img {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  header .banner-slide .inner-content {
+    padding: 0.5rem;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 580px) {
+  header .banner-slide .left-side h2 {
+    font-size: 1.2rem;
+  }
+
+  header .banner-slide .left-side p {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+
+}
+
+@media (max-width: 580px) {
+  .search-input-container {
+    display: none !important;
+  }
+}
+
+
+/* END Responsividade */
+
+/* Inicio lista produtos */
+.page-inner-content {
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.lista-produto {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding: 0 1rem; /* Adiciona algum espaçamento nas laterais */
+}
+
+/* Configuração geral dos produtos */
+.Lista {
+  min-width: 200px;
+  max-width: 200px;
+  padding: 0.5rem;
+  border: 5px double #87CEEB;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+.Lista:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.Lista img {
+  width: 80%;
+  height: auto;
+  margin: 0 auto;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.Lista img:hover {
+  transform: scale(1.05);
+}
+
+/* Define uma altura fixa para as imagens para manter alinhamento */
+.image-container {
+  height: 180px; /* Ajuste a altura conforme necessário */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  transition: transform 0.3s ease;
+}
+
+.btnPrduto {
+  margin-top: auto; /* Empurra os botões para a parte inferior */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.Lista .name {
+  font-weight: bold;
+  margin-top: 0.4rem;
+}
+
+.Lista .marca {
+  font-size: 12px;
+  margin-top: 0.4rem;
+}
+
+.Lista .estoque {
+  font-size: 13px;
+  margin-top: 0.4rem;
+}
+
+.Lista .price,
+.Lista .price2 {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.Lista .price2 {
+  font-weight: bold;
+}
+
+.Lista .rate {
+  color: #e07800;
+  font-size: 1.3rem;
+  margin-top: 0.4rem;
+}
+
+/* Botões de ação dos produtos */
+.Lista .btnPrduto {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.Lista .btn-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.8rem;
+  background-color: var(--segundopreto);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.Lista .btn-icon:hover {
+  background-color: #005f73;
+  transform: scale(1.05);
+}
+
+.add-to-cart-btn {
+  background-color: #87CEEB;
+  color: #000;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #005f73;
+  color: #fff;
+}
+
+/* Configuração de layout para até 4 colunas */
+.lista-produto > div {
+  flex: 1 1 calc(25% - 1rem);
+  max-width: 280px;
+  box-sizing: border-box;
+}
+
+/* Estilos para paginação */
+.pagination {
+  text-align: center;
+  margin-top: auto;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.pagination-button {
+  padding: 0.6rem 1.2rem;
+  margin: 0 0.3rem;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--segundopreto);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-button:disabled {
+  background-color: #d3d3d3;
+  cursor: not-allowed;
+}
+
+.pagination-button:hover:not(:disabled) {
+  background-color: var(--corpreta);
+}
+
+.pagination span {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .lista-produto > div {
+    flex: 1 1 calc(50% - 1rem); /* Duas colunas */
+  }
+  .pagination-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  .pagination span {
+    font-size: 0.9rem;
+  }
+  .Lista .name,
+  .Lista .price,
+  .Lista .marca {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .lista-produto > div {
+    flex: 1 1 100%; /* Uma coluna */
+  }
+  .pagination-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  .pagination {
+    gap: 0.5rem;
+  }
+  .Lista .name,
+  .Lista .price,
+  .Lista .marca {
+    font-size: 1.2rem;
+  }
+}
+
+.selecao-titulo h3 {
+  text-align: center;
+  font-size: 2rem;
+  color: #000080; /* Azul-marinho */
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.selecao-titulo .underline {
+  width: 100px;
+  height: 3px;
+  background-color: #000;
+  margin: 0 auto 1rem auto; /* Centraliza a underline */
+}
+
+/* final lista produto */
+
+.sessao-exclusiva {
+  background: linear-gradient(135deg, #87CEEB, #4a90e2);
+  width: 100vw;
+  margin-left: calc((100vw - 100%) / -2);
+  padding: 5rem 1rem;
+  overflow: hidden; /* Para controlar o efeito fora da tela */
+}
+
+.sessao-exclusiva .content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  color: #fff;
+  flex-direction: row-reverse;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.sessao-exclusiva .content .left-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 400px;
+}
+
+.sessao-exclusiva .content .left-side h2 {
+  font-size: 2.5rem;
+  color: #fff;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.sessao-exclusiva .content .left-side p {
+  font-size: 1.2rem;
+  color: #f0f0f0;
+}
+
+/* Efeito de animação de "saída da tela" */
+.sessao-exclusiva .content .right-side img {
+  max-width: 400px;
+  border-radius: 10px;
+  transition: transform 0.5s ease, box-shadow 0.3s ease;
+  transform-origin: center;
+}
+
+.sessao-exclusiva .content .right-side img:hover {
+  transform: scale(1.1) translateX(20px) rotate(10deg); /* Faz a imagem parecer sair para a direita e girar */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.btnveragora1 {
+  background-color:var(--segundopreto);
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+}
+
+.btnveragora1:hover {
+  background-color: #005f73;
+  transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+  .sessao-exclusiva .content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .sessao-exclusiva .content .right-side img {
+    max-width: 250px;
+    margin-bottom: 2rem;
+    transform: none; /* Remove o efeito em telas pequenas */
+  }
+}
+
+
+/* Inicion comentarios positivos */
+.comentarios{
+  display: flex;
+  padding: 4rem 1rem;
+  justify-content: space-evenly;
+}
+
+.comentario{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 30%;
+  text-align: center;
+  box-shadow: 0px 0px 15px hsl(0, 0%, 39%);
+  padding: 1rem;
+  border-radius: 1rem;
+  transition: all 0.2s;
+  gap: 0.6rem;
+  font-weight: var(--corpreta);
+}
+
+.comentario .rate{
+  color: #e07800;
+}
+
+.comentario:hover{
+transform: translateY(-5px);
+}
+
+.comentario p:first-child{
+  font-weight: bold;
+  font-size: 5rem;
+  color: var(--seconda-cor);
+  margin-top: 3rem;
+  line-height: 3rem;
+}
+
+.comentarios{
+  flex-direction: row;
+  gap: 1.5rem;
+  margin-inline: auto;
+}
+/* Final comentarios positivos */
+
+/* Início Rodapé */
+footer {
+  background-color: #00498d;
+  color: #fff;
+  width: 100vw; /* Define a largura para ocupar toda a viewport */
+  margin-left: calc((100vw - 100%) / -2); /* Corrige o alinhamento */
+  padding: 2rem 1rem;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+footer .pager-inner-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  max-width: 1600px; /* Limita o conteúdo para um layout responsivo */
+  margin: 0 auto; /* Centraliza o conteúdo dentro do rodapé */
+}
+
+footer .download-options p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+footer a img {
+  width: 50px;
+  height: 50px;
+  margin: 0 10px;
+  transition: transform 0.3s ease;
+}
+
+footer a img:hover {
+  transform: scale(1.1);
+}
+
+footer .logo-footer .logo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: red;
+}
+
+footer .logo-footer p {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #fff;
+}
+
+
+
+footer hr {
+  margin: 2rem auto; /* Centraliza horizontalmente */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 80%; /* Ajusta a largura da linha */
+}
+
+footer .copyright {
+  font-size: 0.8rem;
+  color: #d1d1d1;
+  margin-top: 1rem;
+}
+/* Final Rodapé */
+
+/* Início Lista Carinho */
+.sidebar-cart {
+  background-color: #fff;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 2;
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  box-shadow: 5px 5px 50px var(--seconda-cor);
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.sidebar-cart::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar-cart .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.sidebar-cart .top h3 {
+  font-size: 1.5rem;
+  color: var(--corpreta); /* Completar com uma cor */
+}
+
+.sidebar-cart .top button {
+  background-color: var(--corpreta);
+  color: #fff;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lista-produto-carinho {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--luzcor);
+}
+
+.total-conteiner {
+  font-size: 1.2rem;
+  color: var(--corpreta);
+  margin: 1rem 0;
+  font-weight: bold;
+}
+
+.btn-icon {
+  background-color: var(--seconda-cor);
+  color: #fff;
+  text-align: center;
+  padding: 0.75rem 1rem;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-icon:hover {
+  background-color: darken(var(--seconda-cor), 10%);
+}
+
+/* Estilo do texto "Seu Carinho está vazio" */
+.sidebar-cart i {
+  font-size: 0.9rem;
+  color: #888;
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* Início Produto do Carinho */
+.sidebar-produto {
+  display: flex;
+  width: 100%;
+  padding: 0.5rem;
+  gap: 1rem;
+  align-items: center;
+  border-bottom: 1px solid var(--luzcor);
+}
+
+.sidebar-produto .left-side {
+  flex-shrink: 0;
+}
+
+.sidebar-produto .remove-produto-btn {
+  background-color: var(--corpreta);
+  color: #fff;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-produto .details {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar-produto .details h4 {
+  font-size: 1rem;
+  color: var(--corpreta);
+  margin: 0;
+}
+
+.sidebar-produto .details p {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.sidebar-produto .details .price-sum {
+  font-weight: bold;
+}
+
+.sidebar-produto .details input[type="number"] {
+  width: 60px;
+  padding: 0.2rem;
+  border: 1px solid var(--corpreta);
+  border-radius: 3px;
+  text-align: center;
+}
+
+.sidebar-produto .right-side img {
+  width: 100px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.btn-icon1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.8rem;
+  background-color: var(--segundopreto);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+
+.btn-icon1:hover {
+  background-color: #005f73; /* Cor de fundo ao passar o mouse */
+  transition: color 0.3s; /* Transição suave na cor */
+}
+
+
+/* Final Produto do Carinho */
+
+
+/* Inicio btn ver mais*/
+
+.btnvermais {
+  display: block; /* Para permitir centralização */
+  margin: 20px auto; /* Margem superior/inferior de 20px e centraliza horizontalmente */
+  padding: 10px 40px; /* Espaçamento interno do botão */
+  background-color: var(--segundopreto); /* Cor de fundo inicial (azul) */
+  color: white; /* Cor do texto */
+  border: none; /* Sem borda */
+  border-radius: 5px; /* Bordas arredondadas */
+  font-size: 20px; /* Tamanho da fonte */
+  cursor: pointer; /* Muda o cursor para indicar que é clicável */
+  transition: background-color 0.3s; /* Transição suave para a mudança de cor */
+  font-weight: bold;
+}
+
+.btnvermais:hover {
+  background-color: #005f73; /* Cor de fundo ao passar o mouse */
+}
+
+.btnvermais .svg-inline--fa {
+  color: white; /* Cor do ícone */
+  transition: color 0.3s; /* Transição suave na cor */
+}
+
+.btnvermais:hover .svg-inline--fa {
+  color: var(--primeiropreto); /* Cor do ícone ao passar o mouse */
+}
+
+
+/* Início Pagamento */
+.pagamento-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Título do pagamento */
+.pagamento-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Total do pedido */
+.pagamento-total {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #f56c42;
+  margin-bottom: 20px;
+}
+
+/* Título da lista de itens */
+.pagamento-itens-title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Lista de itens no carrinho */
+.pagamento-itens-list {
+  list-style: none;
+  padding: 0;
+}
+
+.pagamento-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.pagamento-item-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+/* Estilo do endereço de entrega */
+.pagamento-endereco-container {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f1f1f1;
+  border-radius: 8px;
+}
+
+.pagamento-endereco-title {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.pagamento-endereco-input,
+.pagamento-endereco-textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.pagamento-buscar-cep-btn {
+  background-color: #f56c42;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.pagamento-buscar-cep-btn:hover {
+  background-color: #e55c30;
+}
+
+/* Estilo dos campos de pagamento */
+.pagamento-tipo-pagamento-title {
+  font-size: 1.2rem;
+  margin-top: 20px;
+  color: #333;
+}
+
+.pagamento-tipo-pagamento {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.pagamento-radio-label {
+  font-size: 1.1rem;
+}
+
+.pagamento-radio-input {
+  margin-right: 8px;
+}
+
+/* Botão de finalizar compra */
+.pagamento-btn {
+  width: 100%;
+  background-color: #42b72a;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagamento-btn:hover {
+  background-color: #388e3c;
+}
+
+/* Mensagem de erro */
+.pagamento-erro-message {
+  color: red;
+  text-align: center;
+  font-size: 1.1rem;
+  margin-top: 20px;
+}
+
+/* Estilo para o QR Code */
+.pagamento-qr-code {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.pagamento-qr-code-title {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.pagamento-qr-code-img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+/* Fim Pagamento */
+
+
+
+/* Loading.css */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Para centralizar na tela */
+}
+
+.loading-circle {
+  border: 8px solid #f3f3f3; /* Cor de fundo */
+  border-top: 8px solid #3498db; /* Cor da bolinha */
+  border-radius: 50%;
+  width: 50px; /* Tamanho da bolinha */
+  height: 50px; /* Tamanho da bolinha */
+  animation: spin 1s linear infinite; /* Animação de rotação */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Estilo geral da página */
+
+/* Contêiner do login */
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 40px 20px; /* Aumenta o padding para afastar do cabeçalho e rodapé */
+  box-sizing: border-box;
+}
+
+/* Contêiner do formulário (ajustado para ficar afastado do cabeçalho e rodapé) */
+.login-form-container {
+  width: 100%;
+  max-width: 400px; /* Define a largura máxima do formulário */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  margin-top: 40px;  /* Adiciona margem superior para afastar do topo */
+  margin-bottom: 40px; /* Adiciona margem inferior para afastar do rodapé */
+}
+
+/* Título do login */
+.login h2 {
+  font-size: 26px; /* Tamanho de fonte menor */
+  color: #1e3c72; /* Azul marinho */
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Estilo dos campos de input */
+.login input {
+  width: 100%; /* Campo ocupa toda a largura do contêiner */
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+/* Efeito de foco nos inputs */
+.login input:focus {
+  border-color: #1e3c72; /* Cor azul marinho no foco */
+  outline: none;
+}
+
+.senha-container {
+  position: relative;
+  width: 100%;
+}
+
+.senha-input {
+  width: 100%;
+  padding-right: 2.5rem; /* Espaço para o ícone */
+}
+
+.mostrar-senha-icone {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+}
+
+/* Estilo do botão de login */
+.login button {
+  width: 100%; /* O botão ocupa toda a largura do contêiner */
+  padding: 10px;
+  background-color: #1e3c72; /* Azul marinho */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Efeito ao passar o mouse sobre o botão */
+.login button:hover {
+  background-color: #2a5298; /* Cor mais clara ao passar o mouse */
+}
+
+/* Estilo para a mensagem de erro */
+.login p {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Estilo do link de registro */
+.login-register {
+  font-size: 16px;
+  color: #555;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.login-register a {
+  color: #1e3c72;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-register a:hover {
+  text-decoration: underline;
+}
+
+
+/* Estilo geral da página */
+
+/* Efeito ao passar o mouse sobre o botão */
+.registro button:hover {
+  background-color: #2a5298; /* Cor mais clara ao passar o mouse */
+}
+
+/* Estilo do link de login */
+.registro a {
+  font-size: 16px;
+  color: #555;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.registro a {
+  color: #1e3c72;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.registro a:hover {
+  text-decoration: underline;
+}
+
+/* Estilo para a mensagem de erro */
+.registro p {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Estilo geral da página */
+
+/* Contêiner do registro */
+.registro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Contêiner do formulário (ajustado para ficar pequeno, como o login) */
+.registro-form-container {
+  width: 100%;
+  max-width: 400px; /* Define a largura máxima do formulário */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  margin-top: 20px;
+}
+
+/* Título do registro */
+.registro h2 {
+  font-size: 26px; /* Tamanho de fonte menor */
+  color: #1e3c72; /* Azul marinho */
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Estilo dos campos de input */
+.registro input {
+  width: 100%; /* Campo ocupa toda a largura do contêiner */
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+/* Efeito de foco nos inputs */
+.registro input:focus {
+  border-color: #1e3c72; /* Cor azul marinho no foco */
+  outline: none;
+}
+
+/* Estilo do botão de registro */
+.registro button {
+  width: 100%; /* O botão ocupa toda a largura do contêiner */
+  padding: 10px;
+  background-color: #1e3c72; /* Azul marinho */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Estilo do link para login */
+.registro .login-register a {
+  color: #1e3c72;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.registro .login-register a:hover {
+  text-decoration: underline;
+}
