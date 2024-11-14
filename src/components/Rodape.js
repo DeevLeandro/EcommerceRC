@@ -27,7 +27,7 @@ export default function Rodape() {
 
         <div>
           <div className="logo-footer">
-          <h1 className="logo">
+          <h1 className="logo1">
            +<span>RCHospitalar</span>
             </h1>
             <p>

@@ -43,6 +43,7 @@ export default function Produto({ id, nome, preco, preco2, estoque, marca, image
         />
       </div>
       <p className="name">{nome}</p>
+      <p className="id">{id}</p>
       <p className="marca">{marca}</p>
       <p className="estoque">{estoque}</p>
       <p className="price"><span>R$</span>{precoAtacado.toFixed(2)}</p>

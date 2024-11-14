@@ -60,12 +60,31 @@ input[type="search"] {
 
 .logo {
   color: red;
-  font: bold;
+  font-weight: bold;
+  font-size: 2rem; /* Aumenta o tamanho da fonte */
+  display: flex;
+  align-items: center;
 }
 
 .logo span {
   color: var(--segundopreto);
+  margin-left: 0.3rem;
+  font-weight: bold;
+  font-size: 2.2rem; /* Um pouco maior para destaque */
+  letter-spacing: 1px;
+  transition: color 0.3s ease, transform 0.3s ease; /* Efeito de transição */
 }
+
+.logo:hover span {
+  color: #4a90e2; /* Mudança de cor ao passar o mouse */
+  transform: scale(1.05); /* Leve aumento para destacar */
+}
+
+.logo-icon {
+  margin-right: 0.5rem; /* Margem à direita */
+  color: #6fd8ed;
+}
+
 
 /* Diminui o espaçamento entre os itens do menu */
 nav ul li {
@@ -433,10 +452,16 @@ header .banner-slide .right-side img {
 .Lista .marca {
   font-size: 12px;
   margin-top: 0.4rem;
+  color: #333;
 }
 
+.Lista .id {
+  font-weight: bold;
+  font-size: 10px;
+  margin-top: 0.4rem;
+}
 .Lista .estoque {
-  font-size: 13px;
+  font-size: 14px;
   margin-top: 0.4rem;
 }
 
@@ -548,6 +573,7 @@ header .banner-slide .right-side img {
     font-size: 0.9rem;
   }
   .Lista .name,
+  .Lista .id,
   .Lista .price,
   .Lista .marca {
     font-size: 1rem;
@@ -753,7 +779,7 @@ footer a img:hover {
 footer .logo-footer .logo {
   font-size: 2rem;
   font-weight: bold;
-  color: red;
+  color: white;
 }
 
 footer .logo-footer p {
@@ -983,69 +1009,75 @@ footer .copyright {
 
 
 /* Início Pagamento */
+
 .pagamento-container {
+  padding: 20px;
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
   font-family: Arial, sans-serif;
 }
 
-/* Título do pagamento */
 .pagamento-title {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-/* Total do pedido */
-.pagamento-total {
-  text-align: center;
-  font-size: 1.5rem;
-  color: #f56c42;
+  font-size: 24px;
+  font-weight: bold;
   margin-bottom: 20px;
-}
-
-/* Título da lista de itens */
-.pagamento-itens-title {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
   color: #333;
 }
 
-/* Lista de itens no carrinho */
-.pagamento-itens-list {
-  list-style: none;
-  padding: 0;
+.produtos-container {
+  border-top: 1px solid #ddd;
+  margin-top: 10px;
+  padding-top: 10px;
 }
 
-.pagamento-item {
+.produto-item {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
 }
 
-.pagamento-item-img {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  margin-right: 15px;
+.produto-imagem {
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
 }
 
-/* Estilo do endereço de entrega */
+.produto-info {
+  flex: 1;
+}
+
+.produto-nome {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.produto-quantidade,
+.produto-preco {
+  font-size: 14px;
+  color: #555;
+}
+
+.pagamento-total {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #333;
+}
+
+.pagamento-prazo {
+  font-size: 16px;
+  margin-top: 10px;
+  color: #333;
+}
+
 .pagamento-endereco-container {
-  margin-top: 30px;
-  padding: 20px;
-  background-color: #f1f1f1;
-  border-radius: 8px;
+  margin-top: 20px;
 }
 
 .pagamento-endereco-title {
-  font-size: 1.3rem;
-  color: #333;
+  font-size: 18px;
+  font-weight: bold;
   margin-bottom: 10px;
 }
 
@@ -1054,88 +1086,54 @@ footer .copyright {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
 }
 
-.pagamento-buscar-cep-btn {
-  background-color: #f56c42;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  margin-bottom: 15px;
-}
-
-.pagamento-buscar-cep-btn:hover {
-  background-color: #e55c30;
-}
-
-/* Estilo dos campos de pagamento */
-.pagamento-tipo-pagamento-title {
-  font-size: 1.2rem;
-  margin-top: 20px;
-  color: #333;
-}
-
-.pagamento-tipo-pagamento {
+.pagamento-buttons-container {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
+  gap: 10px;
+  justify-content: space-between;
 }
 
-.pagamento-radio-label {
-  font-size: 1.1rem;
-}
-
-.pagamento-radio-input {
-  margin-right: 8px;
-}
-
-/* Botão de finalizar compra */
-.pagamento-btn {
-  width: 100%;
-  background-color: #42b72a;
+.pagamento-buscar-cep-btn, .pagamento-calcular-frete-btn {
+  background-color: #5C6BC0;
   color: white;
-  padding: 15px;
   border: none;
-  border-radius: 5px;
-  font-size: 1.2rem;
+  padding: 12px 25px;
+  font-size: 14px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  width: 48%; /* Para que os botões fiquem lado a lado */
+  margin-bottom: 1rem;
 }
 
-.pagamento-btn:hover {
-  background-color: #388e3c;
+.pagamento-buscar-cep-btn:hover, .pagamento-calcular-frete-btn:hover {
+  background-color: #3f4f96;
 }
 
-/* Mensagem de erro */
-.pagamento-erro-message {
-  color: red;
-  text-align: center;
-  font-size: 1.1rem;
-  margin-top: 20px;
+
+.pagamento-finalizar-compra-btn {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
 }
 
-/* Estilo para o QR Code */
-.pagamento-qr-code {
-  margin-top: 30px;
-  text-align: center;
+
+.pagamento-finalizar-compra-btn:hover {
+  background-color: #45a049;
 }
 
-.pagamento-qr-code-title {
-  font-size: 1.3rem;
-  color: #333;
-  margin-bottom: 15px;
-}
-
-.pagamento-qr-code-img {
-  width: 200px;
-  height: 200px;
-  object-fit: contain;
+.pagamento-finalizar-compra-btn {
+  width: 100%;
+  background-color: #007BFF;
 }
 /* Fim Pagamento */
 
