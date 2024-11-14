@@ -47,7 +47,7 @@ export default function Pagamento() {
         },
         params: {
           Token: "54918616RFBA4R4990RA38CR7A0787D2FD3E",
-          CEPOrigem: "74075030",
+          CEPOrigem: "76255000",
           CEPDestino: cepDestino.replace(/[^\d]/g, ""),
           ValorNFe: total.toFixed(2).replace('.', ','),
           QtdeVolume: "1",
