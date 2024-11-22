@@ -203,7 +203,7 @@ header {
   background-color: #fff;
   overflow: hidden;
   padding: 1rem;
-  height: 325px ;
+  height: 325px;
 }
 
 header .banner-slide {
@@ -235,26 +235,25 @@ header .banner-slide .left-side h2 {
   margin-left: 20%;
 }
 
-
 header .banner-slide .right-side img {
   width: 75%;
   border-radius: 15px;
   display: flex;
- margin-bottom: 300px;
- margin-left: 100px;
+  margin-bottom: 300px;
+  margin-left: 100px;
 }
-
 
 /* Botões do slide */
 .slider-arrows {
   position: absolute;
   top: 35%;
   width: 100%;
+  right: 1px;
+  left: 1px;
   display: flex;
   justify-content: space-between;
   transform: translateY(-80%);
   pointer-events: none;
-  
 }
 
 .arrow {
@@ -341,7 +340,6 @@ header .banner-slide .right-side img {
     margin: 0 auto;
     width: 90%;
   }
-
 }
 
 @media (max-width: 768px) {
@@ -366,7 +364,6 @@ header .banner-slide .right-side img {
     font-size: 0.9rem;
     padding: 0.5rem;
   }
-
 }
 
 @media (max-width: 580px) {
@@ -375,8 +372,33 @@ header .banner-slide .right-side img {
   }
 }
 
+/* Atualizações para exibir apenas a imagem no modo celular */
+@media (max-width: 768px) {
+  /* Oculta o conteúdo do lado esquerdo */
+  header .banner-slide .left-side {
+    display: none;
+  }
 
-/* END Responsividade */
+  /* Centraliza e ajusta a imagem no modo celular */
+  header .banner-slide .right-side img {
+    width: 100%; /* Imagem ocupa toda a largura disponível */
+    margin: 0 auto;
+    display: block;
+  }
+
+  /* Remove espaçamentos extras e ajusta o contêiner */
+  header .banner-slide .inner-content {
+    padding: 0;
+    flex-direction: column;
+  }
+
+  /* Ajusta a altura do header para o tamanho da imagem */
+  header {
+    height: auto; /* Altura se adapta automaticamente à imagem */
+    padding: 0;
+  }
+}
+
 
 /* Inicio lista produtos */
 .page-inner-content {
@@ -465,6 +487,7 @@ header .banner-slide .right-side img {
   margin-top: 0.4rem;
 }
 
+
 .Lista .price,
 .Lista .price2 {
   font-size: 1rem;
@@ -476,10 +499,24 @@ header .banner-slide .right-side img {
 }
 
 .Lista .rate {
-  color: #e07800;
-  font-size: 1.3rem;
-  margin-top: 0.4rem;
+  display: flex;
+  gap: 5px; /* Espaçamento entre as estrelas */
+  margin-top: 10px; /* Espaço acima das estrelas */
+  align-items: center; /* Alinha as estrelas ao centro */
 }
+
+.Lista .rate .star {
+  color: #d3d3d3; /* Cor das estrelas vazias (cinza claro) */
+  font-size: 0.9rem; /* Tamanho da estrela */
+  cursor: pointer; /* Cursor de mão ao passar por cima */
+  transition: color 0.2s ease; /* Transição suave ao mudar de cor */
+}
+
+.Lista .rate .star.filled {
+  color: #f8c600; /* Cor das estrelas preenchidas (amarelo dourado) */
+}
+
+
 
 /* Botões de ação dos produtos */
 .Lista .btnPrduto {
@@ -598,6 +635,84 @@ header .banner-slide .right-side img {
   }
 }
 
+/* Menu categorias abaixo do navbar */
+.menu-categorias {
+  background-color: #34495e; /* Cor de fundo escura, mais suave */
+  padding: 8px 20px; 
+  position: fixed;
+  top: 60px; /* Ajuste para ficar logo abaixo do navbar */
+  left: 0;
+  width: 100%;
+  z-index: 999; /* Fica abaixo do navbar, mas ainda sobre o conteúdo */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}
+
+/* Lista de categorias */
+.menu-categorias ul {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  justify-content: center; /* Itens centralizados */
+  align-items: center;
+}
+
+/* Itens da lista */
+.menu-categorias ul li {
+  margin: 0 20px;
+  padding: 8px 15px;
+  display: flex;
+  align-items: center;
+  color: #ecf0f1; /* Cor do texto */
+  cursor: pointer;
+  font-size: 1.1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Efeito de hover */
+.menu-categorias ul li:hover {
+  background-color: #1abc9c; /* Cor suave para o hover */
+  transform: translateY(-3px); /* Efeito de elevar o item */
+}
+
+/* Categoria selecionada */
+.menu-categorias ul li.selected {
+  background-color: #2980b9; /* Azul para a categoria selecionada */
+  color: #ffffff;
+  font-weight: bold;
+}
+
+/* Ícones ao lado do nome da categoria */
+.menu-categorias ul li svg {
+  margin-right: 10px; /* Espaçamento entre o ícone e o texto */
+  font-size: 1.3rem; /* Aumenta o tamanho do ícone */
+}
+
+/* Responsividade: Ajustes para telas pequenas */
+@media (max-width: 768px) {
+  .menu-categorias {
+    top: 50px; /* Ajusta a distância do navbar em telas menores */
+    padding: 8px;
+  }
+
+  .menu-categorias ul {
+    flex-direction: column; /* Itens ficam empilhados verticalmente */
+    align-items: stretch; /* Ocupa a largura toda */
+  }
+
+  .menu-categorias ul li {
+    margin: 5px 0;
+    padding: 10px 0;
+    font-size: 1.2rem;
+    text-align: center; /* Centraliza o texto */
+  }
+}
+
+
+/* fim menu categoria */
+
+/* inicio sessao exclusiva */
 .selecao-titulo h3 {
   text-align: center;
   font-size: 2rem;
@@ -1191,7 +1306,7 @@ footer .copyright {
 
 /* Título do login */
 .login h2 {
-  font-size: 26px; /* Tamanho de fonte menor */
+  font-size: 35px; /* Tamanho de fonte menor */
   color: #1e3c72; /* Azul marinho */
   font-weight: bold;
   text-align: center;
@@ -1201,11 +1316,11 @@ footer .copyright {
 /* Estilo dos campos de input */
 .login input {
   width: 100%; /* Campo ocupa toda a largura do contêiner */
-  padding: 10px;
-  margin: 10px 0;
+  padding: 8px; /* Espaçamento interno menor */
+  margin: 8px 0; /* Espaçamento externo menor */
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 14px; /* Fonte menor */
   transition: all 0.3s ease;
 }
 
@@ -1215,13 +1330,16 @@ footer .copyright {
   outline: none;
 }
 
+/* Contêiner para campo de senha */
 .senha-container {
   position: relative;
-  width: 100%;
+  width: 100%; /* Garante que ocupa o espaço do contêiner */
 }
 
+/* Campo de senha com espaçamento para ícone */
 .senha-input {
   width: 100%;
+  padding: 8px; /* Ajusta o espaçamento interno */
   padding-right: 2.5rem; /* Espaço para o ícone */
 }
 
@@ -1329,7 +1447,7 @@ footer .copyright {
 /* Contêiner do formulário (ajustado para ficar pequeno, como o login) */
 .registro-form-container {
   width: 100%;
-  max-width: 400px; /* Define a largura máxima do formulário */
+  max-width: 300px; /* Define a largura máxima do formulário */
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -1340,11 +1458,18 @@ footer .copyright {
 
 /* Título do registro */
 .registro h2 {
-  font-size: 26px; /* Tamanho de fonte menor */
+  font-size: 35px; /* Tamanho de fonte menor */
   color: #1e3c72; /* Azul marinho */
   font-weight: bold;
   text-align: center;
   margin-bottom: 20px;
+}
+
+/* Estilo do contêiner para centralizar e limitar largura */
+.registro {
+  max-width: 400px; /* Largura máxima do contêiner */
+  margin: 0 auto; /* Centraliza na página */
+  padding: 20px; /* Adiciona espaçamento interno */
 }
 
 /* Estilo dos campos de input */
@@ -1352,7 +1477,7 @@ footer .copyright {
   width: 100%; /* Campo ocupa toda a largura do contêiner */
   padding: 10px;
   margin: 10px 0;
-  border: 1px solid #ccc;
+  border: 1px solid #7a7a7a;
   border-radius: 5px;
   font-size: 16px;
   transition: all 0.3s ease;
@@ -1387,3 +1512,144 @@ footer .copyright {
 .registro .login-register a:hover {
   text-decoration: underline;
 }
+
+
+/* inicio descriçao produto */
+.produto-detalhe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.produto-detalhe img {
+  max-width: 500px; /* Limita a largura da imagem */
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.produto-detalhe h1 {
+  font-size: 2.5rem;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.produto-detalhe p {
+  font-size: 1.1rem;
+  color: #555;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.produto-detalhe .preco {
+  font-size: 1.5rem;
+  color: #d9534f;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.produto-detalhe button {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.produto-detalhe button:hover {
+  background-color: #218838;
+}
+
+.produto-detalhe button:focus {
+  outline: none;
+}
+
+/* final descriçao produto */
+
+/* Inicio Sobre Nos */
+
+.sobre-nos {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: linear-gradient(135deg, #87CEEB, #4a90e2); /* Fundo azul-marinho com tom esverdeado */
+  color: #fff;
+  font-family: "Arial", sans-serif;
+  border-radius: 10px; /* Bordas arredondadas no container */
+  margin-top: 3rem; /* Distância do topo */
+  overflow: hidden; /* Previne conteúdos extras visíveis */
+}
+
+.texto-sobre-nos h1 {
+  font-size: 2.8rem;
+  color: #fff; /* Amarelo forte */
+  margin-bottom: 1.5rem;
+  animation: fade-in 1.5s ease-out; /* Animação de entrada */
+}
+
+.texto-sobre-nos p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  animation: slide-up 1.2s ease-out; /* Animação de subida */
+}
+
+.banner-sobre-nos {
+  margin: 2rem 0;
+  animation: fade-in 2s ease-out; /* Animação de entrada */
+}
+
+.banner-imagem {
+  width: 100%;
+  max-width: 1200px; /* Limita a largura da imagem */
+  height: auto;
+  border-radius: 15px; /* Bordas arredondadas */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Efeito de sombra */
+  transition: transform 0.3s ease; /* Transição suave */
+}
+
+.banner-imagem:hover {
+  transform: scale(1.05); /* Zoom ao passar o mouse */
+}
+
+.informacoes-adicionais p {
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  color: #e0e0e0;
+}
+
+.informacoes-adicionais strong {
+  color: #fff; /* Amarelo forte para destaque */
+}
+
+/* Animações */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Final Sobre Nos */

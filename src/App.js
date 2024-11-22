@@ -4,33 +4,34 @@ import Navbar from "./components/Navbar";
 import Rodape from "./components/Rodape";
 import HomePage from "./components/pages/HomePage";
 import Produtopagina from "./components/pages/Produtopagina";
-import Pagamento from "./components/Pagamento"; 
-import Login from "./components/Login";  // Importação da página de Login
-import Registro from "./components/Registro"; // Importe o componente de Registro
+import Pagamento from "./components/Pagamento";
+import Login from "./components/Login";
+import Registro from "./components/Registro";
+import ProdutoDetalhe from "./components/ProdutoDetalhe"; // Página de detalhes do produto
 import { CartProvider } from "./components/CartContext";
 import { PesquisaProvider, usePesquisa } from "./components/PesquisaContext";
 import axios from "axios";
-import Loading from "./components/Loading"; 
+import Loading from "./components/Loading";
 
 function App() {
   const [produto, setProduto] = useState([]);
   const [erro, setErro] = useState(null);
   const [pagina, setPagina] = useState(1);
   const [loading, setLoading] = useState(false);
-  
+
   return (
     <CartProvider>
       <PesquisaProvider>
         <Router>
           <div className="App">
-            <Navbar /> 
-            <MainContent 
-              produto={produto} 
-              setProduto={setProduto} 
-              erro={erro} 
-              setErro={setErro} 
-              pagina={pagina} 
-              setPagina={setPagina} 
+            <Navbar />
+            <MainContent
+              produto={produto}
+              setProduto={setProduto}
+              erro={erro}
+              setErro={setErro}
+              pagina={pagina}
+              setPagina={setPagina}
               loading={loading}
               setLoading={setLoading}
             />
@@ -48,17 +49,17 @@ function MainContent({ produto, setProduto, erro, setErro, pagina, setPagina, lo
   const [limite, setLimite] = useState("4");
 
   useEffect(() => {
-    const novoLimite = searchTerm ? "" : (location.pathname === "/" ? "4" : "12");
+    const novoLimite = searchTerm ? "" : location.pathname === "/" ? "4" : "12";
     setLimite(novoLimite);
     setLoading(true);
 
     const config = {
-      method: 'get',
+      method: "get",
       maxBodyLength: Infinity,
-      url: 'https://equilibrioapperp.pontalsistemas.com.br/serverecommerce/PesqProduto',
+      url: "https://equilibrioapperp.pontalsistemas.com.br/serverecommerce/PesqProduto",
       headers: {
-        'X-Embarcadero-App-Secret': 'DE1BA56B-43C5-469D-9BD2-4EB146EB8473',
-        'Content-Type': 'application/json'
+        "X-Embarcadero-App-Secret": "DE1BA56B-43C5-469D-9BD2-4EB146EB8473",
+        "Content-Type": "application/json",
       },
       params: {
         Token: "LOF2YBFRRPK5SO44TWQA",
@@ -69,10 +70,11 @@ function MainContent({ produto, setProduto, erro, setErro, pagina, setPagina, lo
         Valor: searchTerm,
         limite: novoLimite,
         Paginacao: pagina,
-      }
+      },
     };
 
-    axios.request(config)
+    axios
+      .request(config)
       .then((response) => {
         console.log("Resposta da API:", response.data);
         setProduto(response.data.produtos || response.data);
@@ -92,34 +94,42 @@ function MainContent({ produto, setProduto, erro, setErro, pagina, setPagina, lo
 
   return (
     <main>
-      {loading ? <Loading /> : null} 
-      {erro && <p style={{ color: 'red' }}>{erro}</p>}
+      {loading && <Loading />}
+      {erro && <p style={{ color: "red" }}>{erro}</p>}
       <Routes>
-        <Route 
-          path="/" 
+        <Route
+          path="/"
           element={
-            <HomePage 
-              produto={produto} 
-              erro={erro} 
-              limite={limite} 
+            <HomePage
+              produto={produto}
+              erro={erro}
+              limite={limite}
+              pagina={pagina}
+              handleProximaPagina={handleProximaPagina}
+              handlePaginaAnterior={handlePaginaAnterior}
             />
           }
         />
-        <Route 
-          path="/Produto" 
+        <Route
+          path="/Produto"
           element={
-            <Produtopagina                
-              produto={produto} 
-              erro={erro} 
-              pagina={pagina} 
-              handleProximaPagina={handleProximaPagina} 
-              handlePaginaAnterior={handlePaginaAnterior} 
-            />} 
+            <Produtopagina
+              produto={produto}
+              erro={erro}
+              pagina={pagina}
+              handleProximaPagina={handleProximaPagina}
+              handlePaginaAnterior={handlePaginaAnterior}
+            />
+          }
+        />
+        <Route
+          path="/detalhe-produto/:id"
+          element={<ProdutoDetalhe produto={produto} />}
         />
         <Route path="/pagamento" element={<Pagamento />} />
-        <Route path="/login" element={<Login />} /> {/* Rota para a página de login */}
-        <Route path="/registro" element={<Registro />} /> {/* Rota para a página de registro */}
-      </Routes> 
+        <Route path="/login" element={<Login />} />
+        <Route path="/registro" element={<Registro />} />
+      </Routes>
     </main>
   );
 }
