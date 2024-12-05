@@ -12,6 +12,7 @@ export default function HomePage({ produto, erro, pagina, handleProximaPagina, h
   return (
     <>
       <Header />
+      
       <div className="page-inner-content">
         <div className="selecao-titulo">
           <h3>{limite === "4" ? "Produtos" : ""}</h3>

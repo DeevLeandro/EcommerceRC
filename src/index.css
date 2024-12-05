@@ -40,40 +40,45 @@ input[type="search"] {
 }
 
 /* NAV */
+
 .nav {
-  background-color: #fff;
+  
+  background: linear-gradient(to right, #ffffff, #cde4ff);
   padding: 1rem;
   position: sticky;
   top: 0;
   left: 0;
   box-shadow: 10px 0px 10px #ebebeb;
-  z-index: 1;
+  z-index: 100;
+  font-size: 18px; /* Aumenta o tamanho da fonte do menu */
 }
 
 .nav .inner-content {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   max-width: 1300px;
   margin-inline: auto;
 }
 
+/* LOGO */
 .logo {
   color: red;
   font-weight: bold;
-  font-size: 2rem; /* Aumenta o tamanho da fonte */
+  font-size: 2rem; /* Tamanho aumentado para a logo */
   display: flex;
   align-items: center;
 }
 
 .logo span {
-  color: var(--segundopreto);
+  color: var(--corpreta);
   margin-left: 0.3rem;
   font-weight: bold;
-  font-size: 2.2rem; /* Um pouco maior para destaque */
-  letter-spacing: 1px;
-  transition: color 0.3s ease, transform 0.3s ease; /* Efeito de transição */
+  font-size: 1.5rem; /* Destaque maior */
+  letter-spacing: 1.2px;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
+
 
 .logo:hover span {
   color: #4a90e2; /* Mudança de cor ao passar o mouse */
@@ -82,16 +87,14 @@ input[type="search"] {
 
 .logo-icon {
   margin-right: 0.5rem; /* Margem à direita */
-  color: #6fd8ed;
+  color: var(--segundopreto);
 }
 
-
-/* Diminui o espaçamento entre os itens do menu */
 nav ul li {
   list-style: none;
   display: inline-block;
-  margin-right: 10px; /* Diminui o espaçamento lateral */
-  padding: 5px; /* Diminui o padding */
+  margin-right: 8px; /* Menor espaçamento lateral */
+  padding: 5px;
   transition: background-color 0.3s ease, transform 0.3s ease;
   font-weight: bolder;
 }
@@ -99,8 +102,8 @@ nav ul li {
 /* Estilo do link para remover sublinhado e ajustar cor inicial */
 nav ul li a {
   text-decoration: none;
-  color: #333;
-  font-size: 18px;
+  color: var(--corpreta);
+  font-size: 18px; /* Tamanho da fonte menor */
   display: flex;
   align-items: center;
   gap: 5px;
@@ -109,7 +112,7 @@ nav ul li a {
 
 /* Efeito hover no item de menu */
 nav ul li:hover {
-  background-color: #e0f7fa; /* Azul gelo */
+  background-color: #4a90e2; /* Azul gelo */
   border-radius: 5px; /* Bordas arredondadas para efeito mais suave */
 }
 
@@ -126,9 +129,8 @@ nav ul li:hover a .fa-icon {
 
 /* Alteração da cor do link ao passar o mouse */
 nav ul li:hover a {
-  color: #007acc; /* Azul para contraste */
+  color: #ffff; /* Azul para contraste */
 }
-
 
 .navs-icon-conteiner {
   display: flex;
@@ -136,8 +138,9 @@ nav ul li:hover a {
   gap: 1rem;
 }
 
+/* Aumenta o tamanho do ícone do carrinho */
 .navs-icon-conteiner svg {
-  height: 1.5rem;
+  height: 1.4rem; /* Aumenta o ícone do carrinho */
 }
 
 .navs-icon-conteiner .Shopping-Cart {
@@ -147,20 +150,19 @@ nav ul li:hover a {
 .navs-icon-conteiner .Shopping-Cart .produto-Count {
   content: "";
   position: absolute;
-  background-color: #f00;
+  background-color: red;
   width: 1rem;
   height: 1rem;
   bottom: -8px;
   left: -8px;
   border-radius: 50%;
-  color: #fff;
+  color: var(--corpreta);
   padding: 0.7rem;
   font-size: 0.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 
 /* Aumenta o tamanho do campo de pesquisa */
 .search-input-container {
@@ -172,17 +174,17 @@ nav ul li:hover a {
   margin-right: 1rem;
 }
 
-/* Aumenta a largura do input de pesquisa */
+/* Diminui a largura do campo de pesquisa */
 .search-input-container input {
+  width: 150px; /* Diminui a largura do campo de pesquisa */
   border: none;
   outline: none;
   background-color: transparent;
-  width: 200px; /* Ajuste o tamanho conforme necessário */
 }
 
-/* Se você quiser que o ícone de pesquisa também tenha um tamanho adequado */
+/* Diminui o tamanho do ícone de pesquisa */
 .search-input-container svg {
-  height: 1.5rem; /* Aumenta o ícone para acompanhar o tamanho do campo de pesquisa */
+  height: 1rem; /* Diminui o ícone */
   color: #808080;
 }
 
@@ -192,11 +194,20 @@ nav ul li:hover {
   font-weight: bold;
 }
 
+.icon-verde {
+  color: green;
+}
+
+.icon-cinza {
+  color: gray;
+}
+
 .menu-button {
   display: none;
 }
 
 /* END NAV */
+
 
 /* HEADER - Estilos Globais */
 header {
@@ -298,14 +309,19 @@ header .banner-slide .right-side img {
     font-size: 1.8rem;
   }
 
+  .nav h1 {
+    font-size: 1.2rem;
+  }
+
   nav {
     position: absolute;
-    top: 55px;
+    top: 55px; /* Mantém o nav abaixo do header em telas menores */
     left: 0;
     background-color: #fff;
     width: 100%;
     padding-bottom: 1rem;
     display: none;
+    z-index: 101; /* Garantindo que o nav fique acima do header */
   }
 
   nav.show {
@@ -323,6 +339,18 @@ header .banner-slide .right-side img {
 
   .menu-button {
     display: inline;
+  }
+}
+
+@media (max-width: 580px) {
+  .search-input-container {
+    display: none !important;
+  }
+
+  /* Ajusta a altura do header para o tamanho da imagem */
+  header {
+    height: auto; /* Altura se adapta automaticamente à imagem */
+    padding: 0;
   }
 }
 
@@ -400,11 +428,13 @@ header .banner-slide .right-side img {
 }
 
 
+
 /* Inicio lista produtos */
 .page-inner-content {
   max-width: 1280px;
   margin-inline: auto;
   padding-inline: 1rem;
+  margin-top: 1rem;
 }
 
 .lista-produto {
@@ -413,6 +443,15 @@ header .banner-slide .right-side img {
   gap: 1rem;
   justify-content: center;
   padding: 0 1rem; /* Adiciona algum espaçamento nas laterais */
+}
+
+.selecao-titulo h3 {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #87CEEB;
+  margin-bottom: 0.5rem;
+  position: relative;
 }
 
 /* Configuração geral dos produtos */
@@ -442,6 +481,32 @@ header .banner-slide .right-side img {
 
 .Lista img:hover {
   transform: scale(1.05);
+}
+
+.selecao-titulo h3::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 102, 255, 0.2); /* Efeito dourado suave */
+  filter: blur(6px); /* Cria o brilho difuso */
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.selecao-titulo h3:hover::after {
+  opacity: 1; /* Brilho aparece ao passar o mouse */
+}
+
+.selecao-titulo .underline {
+  width: 80px;
+  height: 3px;
+  background-color: #87CEEB;;
+  margin: 0 auto 1rem auto; /* Centraliza */
+  border-radius: 1.5px; /* Deixa a linha mais elegante */
 }
 
 /* Define uma altura fixa para as imagens para manter alinhamento */
@@ -474,7 +539,8 @@ header .banner-slide .right-side img {
 .Lista .marca {
   font-size: 12px;
   margin-top: 0.4rem;
-  color: #333;
+  color: #424242;
+  font-weight: lighter;
 }
 
 .Lista .id {
@@ -484,19 +550,18 @@ header .banner-slide .right-side img {
 }
 .Lista .estoque {
   font-size: 14px;
-  margin-top: 0.4rem;
+  margin-top: 0.5rem;
 }
 
 
 .Lista .price,
 .Lista .price2 {
   font-size: 1rem;
-  margin-top: 0.5rem;
+  margin-top: 0.3rem;
+  font-weight: bold;
+  margin-bottom: 0.2rem;
 }
 
-.Lista .price2 {
-  font-weight: bold;
-}
 
 .Lista .rate {
   display: flex;
@@ -515,6 +580,7 @@ header .banner-slide .right-side img {
 .Lista .rate .star.filled {
   color: #f8c600; /* Cor das estrelas preenchidas (amarelo dourado) */
 }
+
 
 
 
@@ -708,9 +774,8 @@ header .banner-slide .right-side img {
     text-align: center; /* Centraliza o texto */
   }
 }
-
-
 /* fim menu categoria */
+
 
 /* inicio sessao exclusiva */
 .selecao-titulo h3 {
@@ -1280,124 +1345,142 @@ footer .copyright {
 /* Estilo geral da página */
 
 /* Contêiner do login */
-.login {
+.login-container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 40px 20px; /* Aumenta o padding para afastar do cabeçalho e rodapé */
+  min-height: 100vh;
+  background-color: #f4f4f9; /* Cor de fundo clara e agradável */
+  padding: 20px;
   box-sizing: border-box;
 }
 
-/* Contêiner do formulário (ajustado para ficar afastado do cabeçalho e rodapé) */
-.login-form-container {
+/* Contêiner do formulário */
+.login {
   width: 100%;
-  max-width: 400px; /* Define a largura máxima do formulário */
+  max-width: 400px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   background-color: #fff;
-  margin-top: 40px;  /* Adiciona margem superior para afastar do topo */
-  margin-bottom: 40px; /* Adiciona margem inferior para afastar do rodapé */
+  text-align: center;
 }
 
 /* Título do login */
-.login h2 {
-  font-size: 35px; /* Tamanho de fonte menor */
-  color: #1e3c72; /* Azul marinho */
+.login-title {
+  font-size: 24px;
+  color: #2a5298;
   font-weight: bold;
-  text-align: center;
   margin-bottom: 20px;
 }
 
 /* Estilo dos campos de input */
-.login input {
-  width: 100%; /* Campo ocupa toda a largura do contêiner */
-  padding: 8px; /* Espaçamento interno menor */
-  margin: 8px 0; /* Espaçamento externo menor */
+.login-input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 14px; /* Fonte menor */
-  transition: all 0.3s ease;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
 }
 
 /* Efeito de foco nos inputs */
-.login input:focus {
-  border-color: #1e3c72; /* Cor azul marinho no foco */
+.login-input:focus {
+  border-color: #1e3c72;
   outline: none;
 }
 
-/* Contêiner para campo de senha */
-.senha-container {
-  position: relative;
-  width: 100%; /* Garante que ocupa o espaço do contêiner */
-}
-
-/* Campo de senha com espaçamento para ícone */
-.senha-input {
-  width: 100%;
-  padding: 8px; /* Ajusta o espaçamento interno */
-  padding-right: 2.5rem; /* Espaço para o ícone */
-}
-
-.mostrar-senha-icone {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: #666;
-}
-
 /* Estilo do botão de login */
-.login button {
-  width: 100%; /* O botão ocupa toda a largura do contêiner */
+.login-button {
+  width: 100%;
   padding: 10px;
-  background-color: #1e3c72; /* Azul marinho */
+  margin-top: 10px;
+  background-color: #2a5298;
   color: #fff;
   border: none;
   border-radius: 5px;
   font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 /* Efeito ao passar o mouse sobre o botão */
-.login button:hover {
-  background-color: #2a5298; /* Cor mais clara ao passar o mouse */
+.login-button:hover {
+  background-color: #1e3c72;
 }
 
-/* Estilo para a mensagem de erro */
-.login p {
+/* Desabilitar botão quando em carregamento */
+.login-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Estilo para mensagens */
+
+.login-error {
   color: red;
   font-size: 14px;
-  margin-top: 10px;
-  text-align: center;
+  margin-bottom: 10px;
 }
 
-/* Estilo do link de registro */
-.login-register {
-  font-size: 16px;
-  color: #555;
-  text-align: center;
+.login-message {
+  color: green;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+/* Estilo do botão de cadastro */
+.go-to-cadastro {
+  font-size: 14px;
+  color: #2a5298;
   margin-top: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
-.login-register a {
-  color: #1e3c72;
-  text-decoration: none;
+.go-to-cadastro p{
+  color: red;
+  font-size: 14px;
+  text-align: center;  
+}
+
+.go-to-cadastro:hover {
+  color: #2a5298;
   font-weight: bold;
 }
 
-.login-register a:hover {
-  text-decoration: underline;
+/* Layout responsivo */
+@media (max-width: 768px) {
+  .login {
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .login-title {
+    font-size: 20px;
+  }
+
+  .login-input {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .login-button {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .go-to-cadastro {
+    font-size: 12px;
+  }
 }
 
-
 /* Estilo geral da página */
+
 
 /* Efeito ao passar o mouse sobre o botão */
 .registro button:hover {
@@ -1514,74 +1597,240 @@ footer .copyright {
 }
 
 
-/* inicio descriçao produto */
+/* Container principal */
 .produto-detalhe {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px;
+  flex-direction: row;
+  gap: 40px;
   padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
   background-color: #f9f9f9;
+}
+
+/* Estilo das imagens */
+.produto-imagens {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  max-width: 600px;
+}
+
+.produto-imagens img {
+  width: 100%;
+  max-height: 600px;
+  object-fit: contain;
+  border-radius: 15px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.produto-imagens .produto-imagem-principal {
+  display: block;
+}
+
+.produto-imagens .left {
+  left: 10px;
+}
+
+.produto-imagens .right {
+  right: 10px;
+}
+
+/* Informações do produto */
+.produto-info {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+  padding: 20px;
+  background-color: white;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.produto-detalhe img {
-  max-width: 500px; /* Limita a largura da imagem */
-  width: 100%;
-  border-radius: 8px;
-  margin-bottom: 20px;
+.produto-info h1 {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
 }
 
-.produto-detalhe h1 {
-  font-size: 2.5rem;
+.produto-info .descricao {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #666;
+}
+
+.produto-info .marca {
+  font-size: 18px;
   color: #333;
   font-weight: bold;
-  margin-bottom: 10px;
-  text-align: center;
 }
 
-.produto-detalhe p {
-  font-size: 1.1rem;
-  color: #555;
-  text-align: center;
-  margin: 10px 0;
-}
-
-.produto-detalhe .preco {
-  font-size: 1.5rem;
-  color: #d9534f;
+.produto-info .estoque {
+  font-size: 18px;
+  color: #128C7E;
   font-weight: bold;
-  margin: 20px 0;
 }
 
-.produto-detalhe button {
-  background-color: #28a745;
+.produto-info .preco,
+.produto-info .preco-varejo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+
+.produto-info .btn-produto {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.produto-info .btn-produto button {
+  background-color: var(--segundopreto);
   color: white;
-  padding: 10px 20px;
-  font-size: 1.1rem;
+  padding: 12px 20px;
+  font-size: 16px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   transition: background-color 0.3s ease;
 }
 
-.produto-detalhe button:hover {
-  background-color: #218838;
+.produto-info .btn-produto button:hover {
+  background-color: #005f73;
 }
 
-.produto-detalhe button:focus {
-  outline: none;
+.produto-info .btn-produto .btn-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-/* final descriçao produto */
+.produto-info .btn-produto .add-to-cart-btn {
+  background-color: var(--segundopreto);
+}
+
+.produto-info .btn-produto .add-to-cart-btn:hover {
+  background-color: #005f73;
+}
+
+.produto-info .btn-produto .btn-icon span {
+  font-weight: bold;
+}
+
+.btn-prev, .btn-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 15px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.3s;
+}
+
+.btn-prev:hover, .btn-next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.btn-prev {
+  left: 10px;
+}
+
+.btn-next {
+  right: 10px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .produto-detalhe {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .produto-imagens,
+  .produto-info {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .produto-info {
+    padding: 10px;
+  }
+
+  .produto-imagens img {
+    max-height: 400px;
+  }
+
+  .produto-info h1 {
+    font-size: 24px;
+  }
+
+  .produto-info .preco,
+  .produto-info .preco-varejo {
+    font-size: 20px;
+  }
+
+  .produto-info .btn-produto button {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+}
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .produto-detalhe {
+    flex-direction: column; /* Altera para coluna em telas pequenas */
+    padding: 1rem;
+  }
+
+  .produto-imagens {
+    order: 2;
+    flex: 1 1 100%;
+  }
+
+  .produto-info {
+    order: 1;
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .produto-info h1 {
+    font-size: 2rem;
+  }
+
+  .produto-info .preco {
+    font-size: 1.2rem;
+  }
+
+  .produto-info .btn-produto .btn-icon {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+}
 
 /* Inicio Sobre Nos */
 
 .sobre-nos {
   text-align: center;
   padding: 3rem 1.5rem;
-  background: linear-gradient(135deg, #87CEEB, #4a90e2); /* Fundo azul-marinho com tom esverdeado */
+  background: linear-gradient(to right, hsl(206, 66%, 88%), #60a9fc); 
   color: #fff;
   font-family: "Arial", sans-serif;
   border-radius: 10px; /* Bordas arredondadas no container */
@@ -1591,9 +1840,16 @@ footer .copyright {
 
 .texto-sobre-nos h1 {
   font-size: 2.8rem;
-  color: #fff; /* Amarelo forte */
-  margin-bottom: 1.5rem;
+  color:  var(--corpreta); /* Cor para título principal */
+  margin-bottom: 1rem;
   animation: fade-in 1.5s ease-out; /* Animação de entrada */
+}
+
+.texto-sobre-nos h2 {
+  font-size: 2.2rem;
+  color: #fff; /* Cor para o subtítulo */
+  margin-bottom: 1.5rem;
+  font-weight: normal;
 }
 
 .texto-sobre-nos p {
@@ -1603,32 +1859,65 @@ footer .copyright {
   animation: slide-up 1.2s ease-out; /* Animação de subida */
 }
 
-.banner-sobre-nos {
-  margin: 2rem 0;
-  animation: fade-in 2s ease-out; /* Animação de entrada */
+.diferenciais {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  text-align:  center;
 }
 
-.banner-imagem {
-  width: 100%;
-  max-width: 1200px; /* Limita a largura da imagem */
-  height: auto;
-  border-radius: 15px; /* Bordas arredondadas */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Efeito de sombra */
-  transition: transform 0.3s ease; /* Transição suave */
+.diferenciais li {
+  margin-bottom: 0.8rem;
+  color: #fff; /* Cor para os diferenciais */
 }
 
-.banner-imagem:hover {
-  transform: scale(1.05); /* Zoom ao passar o mouse */
+.diferenciais li::before {
+  content: "•"; /* Usando o caractere de bolinha */
+  font-size: 2.5rem; /* Tamanho maior para as bolinhas */
+  color: #fff; /* Cor personalizada para as bolinhas */
+  margin-right: 5px; /* Espaçamento entre a bolinha e o texto */
+  vertical-align: middle; /* Alinha a bolinha ao meio do texto */
+  font-weight: bold;
+}
+
+.chamada-para-acao {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-top: 2rem;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .informacoes-adicionais p {
   font-size: 1.1rem;
   margin-top: 1rem;
-  color: #e0e0e0;
+  color:  var(--corpreta);
 }
 
 .informacoes-adicionais strong {
   color: #fff; /* Amarelo forte para destaque */
+}
+
+.whatsapp-container {
+  margin-top: 3rem;
+}
+
+.whatsapp-btn {
+  background-color: #03a13d; /* Cor do WhatsApp */
+  color: white;
+  padding: 12px 30px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.whatsapp-btn:hover {
+  background-color: #07e6cc;
+  transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
 }
 
 /* Animações */
@@ -1653,3 +1942,166 @@ footer .copyright {
 }
 
 /* Final Sobre Nos */
+
+/* Inicio Menu Categoria */
+.menu-categoria {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Centraliza o menu */
+  padding: 10px 0;
+  margin: 20px 0;
+  position: relative;
+}
+
+.menu-categoria ul {
+  display: flex;
+  gap: 20px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  animation: slideUp 0.6s ease-out;
+}
+
+.menu-categoria li {
+  padding: 8px 16px;
+  background-color: var(--segundopreto); /* Cor escura dos botões */
+  color: #fff; /* Texto branco */
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  transform: translateY(10px);
+  opacity: 1; /* Mantém visível desde o início */
+}
+
+.menu-categoria li:hover {
+  background-color: #005f73; /* Dourado claro quando passar o mouse */
+  transform: translateY(-5px); /* Animação de elevação */
+}
+
+.menu-categoria li:active {
+  transform: translateY(0); /* Remove animação quando clicar */
+  scale: 0.95; /* Leve redução de tamanho ao clicar */
+}
+
+/* Efeito de entrada com animação */
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Fim Menu Categoria */
+
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+
+/* Estilo para o container principal */
+.contato-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Título */
+.contato-container h2 {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Seção de informações */
+.info-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.info-container div {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #555;
+}
+
+.info-container span {
+  margin-left: 8px;
+}
+
+/* Formulário */
+.contato-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contato-form input,
+.contato-form textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+  transition: all 0.3s ease-in-out;
+}
+
+.contato-form input:focus,
+.contato-form textarea:focus {
+  outline: none;
+  border-color: #007BFF;
+  background: #f0f8ff;
+}
+
+.contato-form textarea {
+  resize: none;
+  height: 100px;
+}
+
+/* Botão */
+.contato-form button {
+  padding: 10px 15px;
+  font-size: 16px;
+  color: #fff;
+  background: var(--segundopreto);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition:  0.3s ease-in-out;
+}
+
+.contato-form button:hover {
+  background: #005f73;
+}
+
+.contato-form button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}

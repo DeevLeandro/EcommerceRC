@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Rodape from "./components/Rodape";
@@ -12,7 +12,9 @@ import { CartProvider } from "./components/CartContext";
 import { PesquisaProvider, usePesquisa } from "./components/PesquisaContext";
 import axios from "axios";
 import Loading from "./components/Loading";
-
+import { CadastroProvider } from "./components/CadastroContext"; // Importando o CadastroProvider corretamente
+import { PrecoProvider } from "./components/PrecoContext";
+import Contato from "./components/Contato";
 function App() {
   const [produto, setProduto] = useState([]);
   const [erro, setErro] = useState(null);
@@ -21,24 +23,28 @@ function App() {
 
   return (
     <CartProvider>
-      <PesquisaProvider>
-        <Router>
-          <div className="App">
-            <Navbar />
-            <MainContent
-              produto={produto}
-              setProduto={setProduto}
-              erro={erro}
-              setErro={setErro}
-              pagina={pagina}
-              setPagina={setPagina}
-              loading={loading}
-              setLoading={setLoading}
-            />
-            <Rodape />
-          </div>
-        </Router>
-      </PesquisaProvider>
+      <CadastroProvider>
+        <PesquisaProvider>
+        <PrecoProvider>
+          <Router>
+            <div className="App">
+              <Navbar />
+              <MainContent
+                produto={produto}
+                setProduto={setProduto}
+                erro={erro}
+                setErro={setErro}
+                pagina={pagina}
+                setPagina={setPagina}
+                loading={loading}
+                setLoading={setLoading}
+              />
+              <Rodape />
+            </div>
+          </Router>
+          </PrecoProvider>
+        </PesquisaProvider>
+      </CadastroProvider>
     </CartProvider>
   );
 }
@@ -87,7 +93,7 @@ function MainContent({ produto, setProduto, erro, setErro, pagina, setPagina, lo
       .finally(() => {
         setLoading(false);
       });
-  }, [pagina, location.pathname, searchTerm]);
+  }, [pagina, location.pathname, searchTerm, limite]); // A dependência de "limite" foi adicionada
 
   const handleProximaPagina = () => setPagina((prev) => prev + 1);
   const handlePaginaAnterior = () => setPagina((prev) => Math.max(prev - 1, 1));
@@ -129,6 +135,7 @@ function MainContent({ produto, setProduto, erro, setErro, pagina, setPagina, lo
         <Route path="/pagamento" element={<Pagamento />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
+        <Route path="/cont" element={<Contato />} />
       </Routes>
     </main>
   );

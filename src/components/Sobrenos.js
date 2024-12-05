@@ -5,32 +5,49 @@ export default function SobreNos() {
     <div className="sobre-nos">
       {/* Texto principal */}
       <div className="texto-sobre-nos">
-        <h1>Sobre Nós</h1>
+        <h1>Quem Somos</h1>
+        <h2>RCHospitalar</h2>
         <p>
-          <strong>A RC HOSPITALAR</strong>, fundada em <strong>OUTUBRO DE 2019</strong>, atua na distribuição de materiais hospitalares.
+          Na <strong>RCHospitalar</strong>, somos uma distribuidora de materiais hospitalares, comprometida em fornecer produtos de alta qualidade para o setor de saúde.
         </p>
         <p>
-          Com sede própria no município de <strong>Montes Claros</strong>, no estado de Goiás, ocupa uma área de 600 m², em expansão, com colaboradores altamente treinados e qualificados.
+          Trabalhamos com equipamentos e materiais certificados, garantindo segurança e eficiência para nossos clientes em todo o Brasil.
         </p>
+
+        {/* Lista de Diferenciais */}
+        <ul className="diferenciais">
+          <li><strong>Materiais de alta qualidade</strong></li>
+          <li><strong>Entrega rápida e segura</strong></li>
+          <li><strong>Atendimento especializado</strong></li>
+          <li><strong>Parcerias confiáveis</strong></li>
+        </ul>
+        
+        {/* Chamada para ação */}
         <p className="chamada-para-acao">
-          <strong>
-            Convidamos você a conhecer mais sobre nossa empresa e a fazer parte
-            da nossa história. Sua saúde e bem-estar são a nossa prioridade!
-          </strong>
+          <strong>Explore nossa linha de materiais hospitalares e faça seu pedido com confiança.</strong>
         </p>
       </div>
 
       {/* Informações adicionais */}
       <div className="informacoes-adicionais">
         <p>
-          📍 <strong>Endereço:</strong> Av. Rio Claro, Montes Claros de Goiás, 76255-000
+          📍 <strong>Endereço:</strong> Av rio clado, Montes Claros de Goiás 76255000
         </p>
         <p>
-          🏢 <strong>Empresa:</strong> RC Hospitalar Ltda CNPJ: 35.188.925/0001-92
+          🏢 <strong>Empresa:</strong> RCHospitalar
         </p>
-        <p>
-          📞 <strong>Contato:</strong> (62)3370-1800
-        </p>
+      </div>
+
+      {/* Botão para WhatsApp */}
+      <div className="whatsapp-container">
+        <a 
+          href="https://api.whatsapp.com/send/?phone=556233701800&text=Olá,+gostaria+de+saber+mais+sobre+os+materiais+hospitalares!&type=phone_number&app_absent=0" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="whatsapp-btn"
+        >
+          Fale conosco no WhatsApp
+        </a>
       </div>
     </div>
   );
