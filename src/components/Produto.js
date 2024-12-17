@@ -69,7 +69,7 @@ export default function Produto({ id, nome, preco, preco2, estoque, marca, image
           />
         ))}
       </div>
-      <p className="estoque">{estoque}</p>
+      <p className="estoque"> Quantidade: {estoque}</p>
       <p className="price">
         <span>R$</span>{(TipoCliente === "0" ? precoAtacado : precoVarejo).toFixed(2)}
       </p>

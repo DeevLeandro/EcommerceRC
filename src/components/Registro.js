@@ -31,6 +31,7 @@ export default function Registro() {
       url: "https://equilibrioapperp.pontalsistemas.com.br/serverecommerce/NovaPessoa",
       headers: {
         "X-Embarcadero-App-Secret": "DE1BA56B-43C5-469D-9BD2-4EB146EB8473",
+        
       },
       params: {
         Grupo: "231",

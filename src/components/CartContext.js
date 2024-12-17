@@ -66,8 +66,24 @@ export function CartProvider({ children }) {
     });
   };
 
+  const clearCart = () => {
+    setProdutos([]);
+    setTotal(0);
+    localStorage.removeItem("produtos");
+    localStorage.removeItem("total");
+  };
+
   return (
-    <CartContext.Provider value={{ produtos, total, adicionarAoCarrinho, removerDoCarrinho, atualizarQuantidade }}>
+    <CartContext.Provider
+      value={{
+        produtos,
+        total,
+        adicionarAoCarrinho,
+        removerDoCarrinho,
+        atualizarQuantidade,
+        clearCart,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );

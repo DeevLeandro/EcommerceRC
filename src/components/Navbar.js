@@ -67,9 +67,10 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
-              <Link to="/pagamento">
-                <FontAwesomeIcon icon={faCreditCard} className="fa-icon" />{" "}
-                Pagamento
+              <Link to="/pagamento" className={quantidadeTotal === 0 ? "disabled-link" : ""}>
+                 <button disabled={quantidadeTotal === 0}>
+                 <FontAwesomeIcon icon={faCreditCard} className="fa-icon" /> Pagamento
+                 </button>
               </Link>
             </li>
             <li>

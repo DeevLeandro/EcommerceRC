@@ -50,6 +50,7 @@ export default function Login() {
         setMensagem("Você já possui cadastro.");
         setTemCadastro(true);
         setTipoCliente(response.data.TipoCliente);
+        localStorage.setItem("userID", response.data.ID);
         navigate("/");
       } else {
         setErro("CPF/CNPJ Não Encontrado.");
