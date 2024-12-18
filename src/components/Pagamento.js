@@ -73,6 +73,7 @@ const calcularQtdeVolume = () => {
           Editar: "0",
           IDVenda: "0",
           TipoPg: "4",
+          StatusTransacao: "1",
           Itens: itens,
         },
       };
