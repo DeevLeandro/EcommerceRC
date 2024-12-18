@@ -50,7 +50,7 @@ const calcularQtdeVolume = () => {
       const config = {
         method: "post",
         maxBodyLength: Infinity,
-        url: "http://177.21.218.2:8080/ServerEcommerce/NovaVenda",
+        url: "https://equilibrioapperp.pontalsistemas.com.br/serverecommerce/NovaVenda",
         headers: {
           "X-Embarcadero-App-Secret": "DE1BA56B-43C5-469D-9BD2-4EB146EB8473",
           "Content-Type": "application/json",
