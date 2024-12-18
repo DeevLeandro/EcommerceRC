@@ -1,52 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+
 
 const Mapa = () => {
-  const [location, setLocation] = useState(null);
-  const [error, setError] = useState(null);
-  const endereco = "Av. T-7, 371 - sala 1310 - St. Oeste, Goiânia - GO, 74415-030"; // Endereço da loja
+  const endereco = "Av rio clado, Montes Claros de Goiás 76255000";
+  const [imageStyle, setImageStyle] = useState({});
 
+  // Movimento suave da imagem
   useEffect(() => {
-    const consultarEndereco = async () => {
-      try {
-        // Realizando a solicitação para a API do Google Maps Geocoding
-        const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(endereco)}&key=AIzaSyBZ4FPLvNkkYvOvxurCVAB1w5kVoccdJlk`);
-        const data = await response.json();
+    let positionX = 0;
+    let positionY = 0;
+    let directionX = 1;
+    let directionY = 1;
 
-        // Verificando o status da resposta da API
-        if (data.status === 'OK') {
-          const { lat, lng } = data.results[0].geometry.location;
-          setLocation({ lat, lng });
-        } else {
-          // Exibindo o erro completo retornado pela API
-          setError(`Erro ao obter dados de geolocalização. Status: ${data.status}. Mensagem: ${data.error_message}`);
-        }
-      } catch (err) {
-        // Capturando qualquer erro durante a requisição
-        setError('Erro ao consultar a API: ' + err.message);
-      }
-    };
+    const interval = setInterval(() => {
+      positionX += directionX * 0.5;
+      positionY += directionY * 0.3;
 
-    consultarEndereco();
+      if (positionX > 10 || positionX < -10) directionX *= -1;
+      if (positionY > 5 || positionY < -5) directionY *= -1;
+
+      setImageStyle({
+        transform: `translate(${positionX}px, ${positionY}px)`,
+      });
+    }, 100);
+
+    return () => clearInterval(interval);
   }, []);
+
+  // Função para abrir o Google Maps
+  const abrirMapa = () => {
+    const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(endereco)}`;
+    window.open(url, '_blank');
+  };
 
   return (
     <div className="mapa-container">
-      <h3>Visite-nos</h3>
-      <div className="mapa">
-        {error ? (
-          <p>{error}</p>
-        ) : location ? (
-          <iframe
-            title="Localização da Loja"
-            width="100%"
-            height="400"
-            src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBZ4FPLvNkkYvOvxurCVAB1w5kVoccdJlk&q=${location.lat},${location.lng}`}
-            allowFullScreen
-            loading="lazy"
-          ></iframe>
-        ) : (
-          <p>Carregando mapa...</p>
-        )}
+      <h3 className="mapa-title">Visite-nos</h3>
+      <div className="mapa-wrapper" onClick={abrirMapa}>
+        <img
+          src="/images/Mapa2.png"
+          alt="Mapa Animado"
+          className="mapa-imagem"
+          style={imageStyle}
+        />
+        <p className="mapa-texto">Clique no mapa para abrir </p>
       </div>
     </div>
   );

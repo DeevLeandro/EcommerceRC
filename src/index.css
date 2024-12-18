@@ -219,7 +219,7 @@ nav ul li:hover {
   font-size: 18px;
   border: none;
   border-radius: 15px;
-  padding: 0.5rem 1rem;
+  padding: 0.2rem 0.5rem;
   cursor: not-allowed;
   width: 100%; /* Faz o botão ocupar toda a largura do link */
   display: flex;
@@ -392,7 +392,9 @@ header .banner-slide .right-side img {
 }
 
 @media (max-width: 580px) {
-
+  .search-input-container {
+    display: none !important;
+  }
 
   /* Ajusta a altura do header para o tamanho da imagem */
   header {
@@ -2158,3 +2160,96 @@ footer .copyright {
   background: #ccc;
   cursor: not-allowed;
 }
+
+/* Mapa início */
+
+.mapa-container {
+  text-align: center;
+  margin: 0; /* Remove margens */
+  padding: 0;
+  width: 100%; /* Ocupa toda a largura */
+}
+
+/* Título */
+.mapa-title {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 10px;
+  font-family: Arial, sans-serif;
+}
+
+/* Wrapper da imagem do mapa */
+.mapa-wrapper {
+  cursor: pointer;
+  border-radius: 0; /* Remove bordas arredondadas para tela inteira */
+  overflow: hidden;
+  position: relative;
+  width: 100%; /* Largura total da tela */
+}
+
+/* Imagem do mapa */
+.mapa-imagem {
+  width: 100vw; /* 100% da largura da viewport */
+  height: 400px; /* Altura fixa */
+  object-fit: cover; /* Mantém a proporção e cobre o container */
+  transition: transform 0.5s ease-in-out; /* Suavização */
+}
+
+/* Texto abaixo do mapa */
+.mapa-texto {
+  margin-top: 10px;
+  color: var(--corpreta);
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+/* Responsividade */
+
+/* Telas médias: Tablets */
+@media (max-width: 768px) {
+  .mapa-title {
+    font-size: 1.5rem; /* Reduz tamanho da fonte */
+  }
+
+  .mapa-imagem {
+    height: 300px; /* Reduz altura da imagem */
+  }
+
+  .mapa-texto {
+    font-size: 0.9rem; /* Ajusta tamanho do texto */
+  }
+}
+
+/* Telas pequenas: Smartphones */
+@media (max-width: 480px) {
+  .mapa-title {
+    font-size: 1.2rem; /* Título menor */
+  }
+
+  .mapa-imagem {
+    height: 200px; /* Reduz altura da imagem */
+  }
+
+  .mapa-texto {
+    font-size: 0.8rem; /* Ajusta tamanho do texto */
+  }
+}
+
+/* Telas muito pequenas */
+@media (max-width: 320px) {
+  .mapa-title {
+    font-size: 1rem; /* Título ainda menor */
+  }
+
+  .mapa-imagem {
+    height: 150px; /* Altura mínima */
+  }
+
+  .mapa-texto {
+    font-size: 0.7rem; /* Texto mais compacto */
+  }
+}
+
+
+/* Mapa fim */

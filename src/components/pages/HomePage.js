@@ -7,6 +7,7 @@ import ListaProduto from "../Listaproduto";
 import Sessaoexclusiva from "../Sessaoexclusiva";
 import Listacomentario from "../Listacomentario";
 import SobreNos from "../Sobrenos";
+import Mapa from "../Mapa";
 
 export default function HomePage({ produto, erro, pagina, handleProximaPagina, handlePaginaAnterior, limite }) {
   return (
@@ -40,6 +41,7 @@ export default function HomePage({ produto, erro, pagina, handleProximaPagina, h
             <Sessaoexclusiva />
             <SobreNos />
             <Listacomentario />
+            <Mapa/>
           </div>
         </div>
       </div>
