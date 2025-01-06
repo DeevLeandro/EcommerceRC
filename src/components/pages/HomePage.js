@@ -8,12 +8,12 @@ import Sessaoexclusiva from "../Sessaoexclusiva";
 import Listacomentario from "../Listacomentario";
 import SobreNos from "../Sobrenos";
 import Mapa from "../Mapa";
+import MenuCategoria from "../Menucategoria";
 
 export default function HomePage({ produto, erro, pagina, handleProximaPagina, handlePaginaAnterior, limite }) {
   return (
     <>
       <Header />
-      
       <div className="page-inner-content">
         <div className="selecao-titulo">
           <h3>{limite === "4" ? "Produtos" : ""}</h3>

@@ -15,6 +15,7 @@ import Loading from "./components/Loading";
 import { CadastroProvider } from "./components/CadastroContext"; // Importando o CadastroProvider corretamente
 import { PrecoProvider } from "./components/PrecoContext";
 import Contato from "./components/Contato";
+import MenuCategoria from "./components/Menucategoria";
 function App() {
   const [produto, setProduto] = useState([]);
   const [erro, setErro] = useState(null);

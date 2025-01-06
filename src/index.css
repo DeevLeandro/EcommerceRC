@@ -48,7 +48,8 @@ input[type="search"] {
   position: sticky;
   top: 0;
   left: 0;
-  box-shadow: 10px 0px 10px #ebebeb;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
   z-index: 100;
   font-size: 18px; /* Aumenta o tamanho da fonte do menu */
 }
@@ -59,6 +60,8 @@ input[type="search"] {
   justify-content: space-between;
   max-width: 1300px;
   margin-inline: auto;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  
 }
 
 /* LOGO */
@@ -156,7 +159,7 @@ nav ul li:hover a {
   bottom: -8px;
   left: -8px;
   border-radius: 50%;
-  color: var(--corpreta);
+  color: white;
   padding: 0.7rem;
   font-size: 0.8rem;
   display: flex;
@@ -256,13 +259,12 @@ nav ul li button:hover {
 
 /* END NAV */
 
-
 /* HEADER - Estilos Globais */
 header {
   background-color: #fff;
   overflow: hidden;
-  padding: 1rem;
-  height: 325px;
+  padding: 1.5rem;
+  border-radius: 8px;
 }
 
 header .banner-slide {
@@ -270,69 +272,74 @@ header .banner-slide {
 }
 
 header .banner-slide .inner-content {
-  max-width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem;
+  padding: 2rem;
   border-radius: 15px;
   background: linear-gradient(135deg, #87CEEB, #4a90e2);
   overflow: hidden;
+  animation: fadeIn 1s ease-in-out;
 }
 
 header .banner-slide .left-side {
   color: #fff;
-  max-width: 50%;
+  max-width: 100%;
   z-index: 2;
 }
 
-header .banner-slide .left-side h2 {
-  font-size: 2rem;
-  margin-left: 1rem;
-  margin-top: 2rem;
-  margin-bottom: 400px;
-  margin-left: 20%;
+header .banner-slide .left-side h2,
+header .banner-slide .left-side h1,
+header .banner-slide .left-side h3,
+header .banner-slide .left-side p {
+  margin: 0.5rem 0;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideInUp 0.6s ease forwards;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 header .banner-slide .right-side img {
-  width: 75%;
-  border-radius: 15px;
-  display: flex;
-  margin-bottom: 300px;
-  margin-left: 100px;
-}
-
-/* Botões do slide */
-.slider-arrows {
-  position: absolute;
-  top: 35%;
   width: 100%;
-  right: 1px;
-  left: 1px;
-  display: flex;
-  justify-content: space-between;
-  transform: translateY(-80%);
-  pointer-events: none;
-}
-
-.arrow {
-  background: rgba(255, 255, 255, 0.137);
-  border: none;
   border-radius: 15px;
-  padding: 20px;
-  cursor: pointer;
-  pointer-events: auto;
-  transition: background-color 0.2s;
-  font-size: 24px;
-  color: var(--seconda-cor);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  transform: scale(0.9);
+  transition: transform 0.8s ease;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.arrow:hover {
-  background: rgba(255, 255, 255, 0.623);
+header .banner-slide .right-side img:hover {
+  transform: scale(1);
 }
+
+/* Animações */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-subtitle-animate-text {
+  animation: slideInUp 1s ease forwards;
+}
+
+.animate-image {
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
 
 /* Oculta os botões do slide em telas menores */
 @media (max-width: 768px) {

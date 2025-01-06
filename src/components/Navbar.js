@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
@@ -51,9 +51,11 @@ export default function Navbar() {
   return (
     <div className="nav">
       <div className="inner-content">
-        <h1 className="logo">
-          +<span>RCHospitalar</span>
-        </h1>
+        <Link to="/" onClick={handleHomeClick}>
+          <h1 className="logo">
+            +<span>RCHospitalar</span>
+          </h1>
+        </Link>
         <nav className={`${showMenu && "show"}`}>
           <ul>
             <li>
@@ -67,24 +69,22 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
-              <Link to="/pagamento" className={quantidadeTotal === 0 ? "disabled-link" : ""}>
-                 <button disabled={quantidadeTotal === 0}>
-                 <FontAwesomeIcon icon={faCreditCard} className="fa-icon" /> Pagamento
-                 </button>
+              <Link
+                to="/pagamento"
+                className={quantidadeTotal === 0 ? "disabled-link" : ""}
+              >
+                <button disabled={quantidadeTotal === 0}>
+                  <FontAwesomeIcon
+                    icon={faCreditCard}
+                    className="fa-icon"
+                  />{" "}
+                  Pagamento
+                </button>
               </Link>
             </li>
             <li>
               <Link to="/cont">
                 <FontAwesomeIcon icon={faPhone} className="fa-icon" /> Contato
-              </Link>
-            </li>
-            <li>
-              <Link to="/login">
-                <FontAwesomeIcon
-                  icon={faUserCircle}
-                  className={`fa-icon ${temCadastro ? "icon-verde" : "icon-cinza"}`}
-                />{" "}
-                Conta
               </Link>
             </li>
           </ul>
@@ -105,6 +105,16 @@ export default function Navbar() {
               aria-label="Buscar"
             />
           </div>
+          <button>
+            <Link to="/login">
+              <FontAwesomeIcon
+                icon={faUserCircle}
+                className={`fa-icon ${
+                  temCadastro ? "icon-verde" : "icon-cinza"
+                }`}
+              />{" "}
+            </Link>
+          </button>
 
           <button
             className="Shopping-Cart"
@@ -112,9 +122,9 @@ export default function Navbar() {
             aria-label={showCart ? "Fechar carrinho" : "Abrir carrinho"}
           >
             <FontAwesomeIcon icon={faCartShopping} />
-            <div className="produto-Count">
-              {quantidadeTotal > 0 ? quantidadeTotal : null}
-            </div>
+            {quantidadeTotal > 0 && (
+              <div className="produto-Count">{quantidadeTotal}</div>
+            )}
           </button>
 
           {showCart && <Listacarinho />}
@@ -129,7 +139,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Exibe o carregamento enquanto isLoading for verdadeiro */}
       {isLoading && <Loading />}
     </div>
   );
