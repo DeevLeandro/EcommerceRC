@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useCart } from "./CartContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ConfigurarCartao from "./ConfigurarCartao";
 
 export default function Pagamento() {
   const { produtos, total, clearCart } = useCart();
@@ -11,6 +12,8 @@ export default function Pagamento() {
   const [pontoReferencia, setPontoReferencia] = useState("");
   const [valorFrete, setValorFrete] = useState(0);
   const [prazoEntrega, setPrazoEntrega] = useState("");
+  const [metodoPagamento, setMetodoPagamento] = useState("");
+  const [mostrarConfigurarCartao, setMostrarConfigurarCartao] = useState(false);
   const navigate = useNavigate();
    
 
@@ -22,6 +25,17 @@ const calcularPesoTotal = () => {
   }, 0);
 
 };
+
+  // Função para fechar o modal
+  const handleClose = () => {
+    setMostrarConfigurarCartao(false);
+  };
+
+  // Função para salvar o cartão
+  const handleSave = (dadosCartao) => {
+    console.log("Cartão salvo:", dadosCartao);
+    setMostrarConfigurarCartao(false);
+  };
 
 const calcularQtdeVolume = () => {
   return produtos.reduce((total, produto) => {
@@ -97,6 +111,12 @@ const calcularQtdeVolume = () => {
     }
   };
 
+  const handleMetodoPagamentoChange = (metodo) => {
+    setMetodoPagamento(metodo);
+    setMostrarConfigurarCartao(metodo === "Cartao");
+  };
+
+
   const buscarEnderecoPorCep = async (cep) => {
     const cepFormatado = cep.replace(/[^\d]/g, "");
     if (cepFormatado.length === 8) {
@@ -169,56 +189,110 @@ const calcularQtdeVolume = () => {
   return (
     <div className="pagamento-container">
       <h2 className="pagamento-title">Resumo do Pedido</h2>
-      <div className="produtos-container">
-        {produtos.map((produto) => (
-          <div key={produto.id} className="produto-item">
-            <img src="/images/Produtos.png" alt={produto.nome} className="produto-imagem" />
-            <div className="produto-info">
-              <h3 className="produto-nome">{produto.nome}</h3>
-              <p className="produto-quantidade">Quantidade: {produto.quantidade}</p>
-              <p className="produto-preco">Preço: R$ {produto.preco.toFixed(2).replace('.', ',')}</p>
-            </div>
+      
+      <div className="pagamento-cards-container">
+        {/* Card de produtos */}
+        <div className="pagamento-card">
+          <h3 className="pagamento-card-title">Produtos</h3>
+          <div className="produtos-container">
+            {produtos.map((produto) => (
+              <div key={produto.id} className="produto-item">
+                <img src="/images/Produtos.png" alt={produto.nome} className="produto-imagem" />
+                <div className="produto-info">
+                  <h4 className="produto-nome">{produto.nome}</h4>
+                  <p className="produto-quantidade">Quantidade: {produto.quantidade}</p>
+                  <p className="produto-preco">Preço: R$ {produto.preco.toFixed(2).replace('.', ',')}</p>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <h3 className="pagamento-total">Total: R$ {total.toFixed(2).replace('.', ',')}</h3>
-      <h3 className="pagamento-total">Frete: R$ {valorFrete.toFixed(2).replace('.', ',')}</h3>
-      <h3 className="pagamento-total">Total com Frete: R$ {(total + valorFrete).toFixed(2).replace('.', ',')}</h3>
-      <h3 className="pagamento-prazo">Prazo de Entrega: {prazoEntrega} dias</h3>
-
-      <div className="pagamento-endereco-container">
-        <h3 className="pagamento-endereco-title">Endereço de Entrega</h3>
-        <input
-          type="text"
-          placeholder="Digite o CEP de Destino"
-          value={cepDestino}
-          onChange={(e) => setCepDestino(e.target.value)}
-          className="pagamento-endereco-input"
-        />
-        <div className="pagamento-buttons-container">
-          <button
-            onClick={() => buscarEnderecoPorCep(cepDestino)}
-            className="pagamento-buscar-cep-btn"
-          >
-            Buscar Endereço
-          </button>
-          <button onClick={calcularFrete} className="pagamento-calcular-frete-btn">
-            Calcular Frete
-          </button>
         </div>
-        <textarea
-          value={enderecoEntrega}
-          onChange={(e) => setEnderecoEntrega(e.target.value)}
-          className="pagamento-endereco-textarea"
-          placeholder="Endereço de entrega"
-        />
-        <input
-          type="text"
-          placeholder="Ponto de Referência"
-          value={pontoReferencia}
-          onChange={(e) => setPontoReferencia(e.target.value)}
-          className="pagamento-endereco-input"
-        />
+        
+        {/* Card de resumo */}
+        <div className="pagamento-card">
+          <h3 className="pagamento-card-title">Resumo Financeiro</h3>
+          <p className="pagamento-total">Total: R$ {total.toFixed(2).replace('.', ',')}</p>
+          <p className="pagamento-total">Frete: R$ {valorFrete.toFixed(2).replace('.', ',')}</p>
+          <p className="pagamento-total">Total com Frete: R$ {(total + valorFrete).toFixed(2).replace('.', ',')}</p>
+          <p className="pagamento-prazo">Prazo de Entrega: {prazoEntrega} dias</p>
+        </div>
+
+        {/* Card de endereço */}
+        <div className="pagamento-card">
+          <h3 className="pagamento-card-title">Endereço de Entrega</h3>
+          <input
+            type="text"
+            placeholder="Digite o CEP de Destino"
+            value={cepDestino}
+            onChange={(e) => setCepDestino(e.target.value)}
+            className="pagamento-endereco-input"
+          />
+          <div className="pagamento-buttons-container">
+            <button onClick={() => buscarEnderecoPorCep(cepDestino)} className="pagamento-buscar-cep-btn">
+              Buscar Endereço
+            </button>
+            <button onClick={calcularFrete} className="pagamento-calcular-frete-btn">
+              Calcular Frete
+            </button>
+          </div>
+          <textarea
+            value={enderecoEntrega}
+            onChange={(e) => setEnderecoEntrega(e.target.value)}
+            className="pagamento-endereco-textarea"
+            placeholder="Endereço de entrega"
+          />
+          <input
+            type="text"
+            placeholder="Ponto de Referência"
+            value={pontoReferencia}
+            onChange={(e) => setPontoReferencia(e.target.value)}
+            className="pagamento-endereco-input"
+          />
+        </div>
+
+        {/* Card de métodos de pagamento */}
+        <div className="pagamento-card">
+          <h3 className="pagamento-card-title">Forma de Pagamento</h3>
+          <div className="pagamento-metodos">
+            <label>
+              <input
+                type="radio"
+                name="metodoPagamento"
+                value="PIX"
+                onChange={() => handleMetodoPagamentoChange("Pix")}
+              />
+              PIX
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="metodoPagamento"
+                value="Cartão"
+                onChange={() => handleMetodoPagamentoChange("Cartao")}
+              />
+              Cartão
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="metodoPagamento"
+                value="Boleto"
+                onChange={() => handleMetodoPagamentoChange("Boleto")}
+              />
+              Boleto
+            </label>
+            {metodoPagamento === "Cartão" && (
+        <button onClick={() => setMostrarConfigurarCartao(true)}>
+          Configurar Cartão
+        </button>
+      )}
+
+      {mostrarConfigurarCartao && (
+        <ConfigurarCartao onClose={handleClose} onSave={handleSave} />
+      )}
+          </div>
+        </div>
+
       </div>
 
       <button onClick={finalizarCompra} className="pagamento-finalizar-compra-btn">

@@ -16,6 +16,7 @@ import { CadastroProvider } from "./components/CadastroContext"; // Importando o
 import { PrecoProvider } from "./components/PrecoContext";
 import Contato from "./components/Contato";
 import MenuCategoria from "./components/Menucategoria";
+import { CartaoProvider } from "./components/CartaoContext";
 function App() {
   const [produto, setProduto] = useState([]);
   const [erro, setErro] = useState(null);
@@ -27,6 +28,7 @@ function App() {
       <CadastroProvider>
         <PesquisaProvider>
         <PrecoProvider>
+          <CartaoProvider>
           <Router>
             <div className="App">
               <Navbar />
@@ -43,6 +45,7 @@ function App() {
               <Rodape />
             </div>
           </Router>
+          </CartaoProvider>
           </PrecoProvider>
         </PesquisaProvider>
       </CadastroProvider>
