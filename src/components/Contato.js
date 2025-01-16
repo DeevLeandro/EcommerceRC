@@ -17,8 +17,7 @@ export default function Contato() {
     // Monta a mensagem para enviar via WhatsApp
     const mensagemWhatsApp = `
       Olá! Meu nome é ${formData.nome}.
-      Email: ${formData.email}
-      Mensagem: ${formData.mensagem}
+       ${formData.mensagem}
     `;
 
     // Número do WhatsApp (com DDI e DDD)
@@ -31,7 +30,7 @@ export default function Contato() {
     window.open(urlWhatsApp, "_blank");
 
     // Reseta o formulário
-    setFormData({ nome: "", email: "", mensagem: "" });
+    setFormData({ nome: "", mensagem: "" });
     setFormEnviado(false);
   };
 

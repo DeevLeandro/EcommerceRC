@@ -44,7 +44,27 @@ const calcularQtdeVolume = () => {
 };
 
   const finalizarCompra = async () => {
-    const idPessoa = localStorage.getItem("userID");
+    
+   // Verificar se o CEP foi preenchido
+   if (!cepDestino || cepDestino.replace(/[^\d]/g, "").length !== 8) {
+    alert("Por favor, insira um CEP válido e calcule o frete antes de finalizar a compra.");
+    return;
+  }
+
+  // Verificar se o frete foi calculado
+  if (valorFrete <= 0) {
+    alert("Por favor, calcule o frete antes de finalizar a compra.");
+    return;
+  }
+
+  // Verificar se uma forma de pagamento foi escolhida
+  if (!metodoPagamento) {
+    alert("Por favor, selecione uma forma de pagamento antes de finalizar a compra.");
+    return;
+  }
+
+  const idPessoa = localStorage.getItem("userID") || "215381"; // Caso o cliente não esteja cadastrado, usa ID fixo consumidor final
+        
     try {
       const itens = produtos.map((produto) => {
         const precoUnit = produto.preco.toFixed(2).replace(".", ",");
@@ -227,14 +247,7 @@ const calcularQtdeVolume = () => {
             onChange={(e) => setCepDestino(e.target.value)}
             className="pagamento-endereco-input"
           />
-          <div className="pagamento-buttons-container">
-            <button onClick={() => buscarEnderecoPorCep(cepDestino)} className="pagamento-buscar-cep-btn">
-              Buscar Endereço
-            </button>
-            <button onClick={calcularFrete} className="pagamento-calcular-frete-btn">
-              Calcular Frete
-            </button>
-          </div>
+          
           <textarea
             value={enderecoEntrega}
             onChange={(e) => setEnderecoEntrega(e.target.value)}
@@ -249,7 +262,15 @@ const calcularQtdeVolume = () => {
             className="pagamento-endereco-input"
           />
         </div>
-
+        <div className="pagamento-buttons-container">
+            <button onClick={() => buscarEnderecoPorCep(cepDestino)} className="pagamento-buscar-cep-btn">
+              Buscar Endereço
+            </button>
+            <button onClick={calcularFrete} className="pagamento-calcular-frete-btn">
+              Calcular Frete
+            </button>
+          </div>
+          
         {/* Card de métodos de pagamento */}
         <div className="pagamento-card">
           <h3 className="pagamento-card-title">Forma de Pagamento</h3>

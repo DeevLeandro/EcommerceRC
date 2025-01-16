@@ -1282,33 +1282,47 @@ footer .copyright {
 .pagamento-container {
   padding: 20px;
   max-width: 800px;
-  margin: 0 auto;
-  font-family: Arial, sans-serif;
+  margin: 20px auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-family: 'Arial', sans-serif;
+  background-color: #fefefe;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 .pagamento-title {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
   margin-bottom: 20px;
   color: #333;
+  text-align: center;
 }
 
 .produtos-container {
-  border-top: 1px solid #ddd;
-  margin-top: 10px;
-  padding-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 4 colunas de largura igual */
+  gap: 20px; /* Espaçamento entre os itens */
+  margin-top: 15px;
+  padding-top: 15px;
 }
 
 .produto-item {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .produto-imagem {
   width: 80px;
   height: 80px;
-  margin-right: 10px;
+  margin-right: 15px;
+  border-radius: 8px;
+  object-fit: cover;
 }
 
 .produto-info {
@@ -1316,81 +1330,86 @@ footer .copyright {
 }
 
 .produto-nome {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   margin: 0;
+  color: #333;
 }
 
 .produto-quantidade,
 .produto-preco {
   font-size: 14px;
-  color: #555;
+  color: #666;
 }
 
 .pagamento-total {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 15px;
   color: #333;
+  text-align: right;
 }
 
 .pagamento-prazo {
   font-size: 16px;
   margin-top: 10px;
-  color: #333;
+  color: #555;
 }
 
 .pagamento-endereco-container {
-  margin-top: 20px;
-  
+  margin-top: 25px;
 }
 
 .pagamento-endereco-title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
-  margin-bottom: 10px;
-  
+  margin-bottom: 15px;
+  color: #333;
 }
 
 .pagamento-endereco-input,
 .pagamento-endereco-textarea {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
+  padding: 12px;
+  margin-bottom: 15px;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 14px;
+  background-color: #fdfdfd;
 }
 
 .pagamento-buttons-container {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   justify-content: space-between;
 }
 
-.pagamento-buscar-cep-btn, .pagamento-calcular-frete-btn {
+.pagamento-buscar-cep-btn,
+.pagamento-calcular-frete-btn {
   background-color: #5C6BC0;
   color: white;
   border: none;
-  padding: 12px 25px;
+  padding: 12px 20px;
   font-size: 14px;
   border-radius: 8px;
-  cursor: pointer;
-  width: 48%; /* Para que os botões fiquem lado a lado */
   margin-bottom: 1rem;
+  cursor: pointer;
+  flex: 1;
+  text-align: center;
+  transition: background-color 0.3s ease;
 }
 
-.pagamento-buscar-cep-btn:hover, .pagamento-calcular-frete-btn:hover {
+.pagamento-buscar-cep-btn:hover,
+.pagamento-calcular-frete-btn:hover {
   background-color: #3f4f96;
 }
-
 
 .pagamento-metodos {
   margin: 20px 0;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 10px;
   background-color: #f9f9f9;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .pagamento-metodos h3 {
@@ -1400,7 +1419,7 @@ footer .copyright {
 }
 
 .pagamento-metodos label {
-
+  display: block;
   margin: 10px 0;
   font-size: 1.2rem;
   color: #555;
@@ -1408,7 +1427,7 @@ footer .copyright {
 }
 
 .pagamento-metodos input[type="radio"] {
-  margin-left: 15px;
+  margin-right: 10px;
   transform: scale(1.2);
   cursor: pointer;
 }
@@ -1424,26 +1443,26 @@ footer .copyright {
 
 .pagamento-finalizar-compra-btn {
   display: inline-block;
-  background-color: #4CAF50;
+  background-color: var(--segundopreto);
   color: #fff;
-  padding: 10px 20px;
+  padding: 15px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
+  font-weight:bold;
   cursor: pointer;
-  font-size: 16px;
-  margin-top: 10px;
+  font-size: 20px;
+  margin-top: 20px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  width: 100%;
 }
-
 
 .pagamento-finalizar-compra-btn:hover {
-  background-color: #45a049;
+  background-color: #0d6c89;
 }
 
-.pagamento-finalizar-compra-btn {
-  width: 100%;
-  background-color: #007BFF;
-}
 /* Fim Pagamento */
+
 
 
 /* configura cartao */
@@ -2156,9 +2175,12 @@ footer .copyright {
   width: 100%;
   display: flex;
   justify-content: center; /* Centraliza o menu */
-  padding: 10px 0;
+  align-items: center; /* Alinha os itens verticalmente */
+  padding: 15px 0;
   margin: 20px 0;
   position: relative;
+  border-radius: 10px;
+ 
 }
 
 .menu-categoria ul {
@@ -2171,26 +2193,48 @@ footer .copyright {
 }
 
 .menu-categoria li {
-  padding: 8px 16px;
-  background-color: var(--segundopreto); /* Cor escura dos botões */
+  display: flex;
+  align-items: center; /* Alinha o texto verticalmente */
+  justify-content: center; /* Centraliza o texto */
+  padding: 12px 24px;
+  background: var(--segundopreto); /* Fundo com gradiente nos botões */
   color: #fff; /* Texto branco */
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  font-weight: 500;
-  transition: all 0.3s ease;
+  font-size: 1rem; /* Tamanho da fonte ajustado */
+  font-weight: 600; /* Texto mais chamativo */
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra mais forte */
   transform: translateY(10px);
   opacity: 1; /* Mantém visível desde o início */
+  text-align: center; /* Centraliza o texto no botão */
 }
 
 .menu-categoria li:hover {
-  background-color: #005f73; /* Dourado claro quando passar o mouse */
-  transform: translateY(-5px); /* Animação de elevação */
+  background: linear-gradient(45deg, #0096c7, #005f73); /* Gradiente mais claro no hover */
+  transform: translateY(-8px); /* Elevação mais pronunciada */
+  box-shadow: 0 8px 16px rgba(0, 149, 199, 0.3); /* Sombra mais intensa no hover */
 }
 
 .menu-categoria li:active {
   transform: translateY(0); /* Remove animação quando clicar */
   scale: 0.95; /* Leve redução de tamanho ao clicar */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduz a sombra ao clicar */
 }
+
+/* Animação para o menu */
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
 
 /* Efeito de entrada com animação */
 @keyframes slideUp {
@@ -2321,6 +2365,7 @@ footer .copyright {
   margin: 0; /* Remove margens */
   padding: 0;
   width: 100%; /* Ocupa toda a largura */
+  border-radius: 15px;
 }
 
 /* Título */
@@ -2334,7 +2379,7 @@ footer .copyright {
 /* Wrapper da imagem do mapa */
 .mapa-wrapper {
   cursor: pointer;
-  border-radius: 0; /* Remove bordas arredondadas para tela inteira */
+  border-radius: 15px; /* Remove bordas arredondadas para tela inteira */
   overflow: hidden;
   position: relative;
   width: 100%; /* Largura total da tela */
