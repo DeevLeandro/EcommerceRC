@@ -15,8 +15,9 @@ import Loading from "./components/Loading";
 import { CadastroProvider } from "./components/CadastroContext"; // Importando o CadastroProvider corretamente
 import { PrecoProvider } from "./components/PrecoContext";
 import Contato from "./components/Contato";
-import MenuCategoria from "./components/Menucategoria";
 import { CartaoProvider } from "./components/CartaoContext";
+import { PagamentoProvider } from "./components/PagamentoContext";
+import Pedido from "./components/Pedido";
 function App() {
   const [produto, setProduto] = useState([]);
   const [erro, setErro] = useState(null);
@@ -29,6 +30,7 @@ function App() {
         <PesquisaProvider>
         <PrecoProvider>
           <CartaoProvider>
+          <PagamentoProvider> 
           <Router>
             <div className="App">
               <Navbar />
@@ -45,6 +47,7 @@ function App() {
               <Rodape />
             </div>
           </Router>
+          </PagamentoProvider>
           </CartaoProvider>
           </PrecoProvider>
         </PesquisaProvider>
@@ -59,7 +62,7 @@ function MainContent({ produto, setProduto, erro, setErro, pagina, setPagina, lo
   const [limite, setLimite] = useState("4");
 
   useEffect(() => {
-    const novoLimite = searchTerm ? "" : location.pathname === "/" ? "4" : "12";
+    const novoLimite = searchTerm ? "" : location.pathname === "/" ? "4" : "";
     setLimite(novoLimite);
     setLoading(true);
 
@@ -86,12 +89,12 @@ function MainContent({ produto, setProduto, erro, setErro, pagina, setPagina, lo
     axios
       .request(config)
       .then((response) => {
-        console.log("Resposta da API:", response.data);
+        // console.log("Resposta da API:", response.data);
         setProduto(response.data.produtos || response.data);
         setErro(null);
       })
       .catch((error) => {
-        console.error("Erro na requisição:", error);
+        // console.error("Erro na requisição:", error);
         setErro(error.message);
       })
       .finally(() => {
@@ -137,6 +140,7 @@ function MainContent({ produto, setProduto, erro, setErro, pagina, setPagina, lo
           element={<ProdutoDetalhe produto={produto} />}
         />
         <Route path="/pagamento" element={<Pagamento />} />
+        <Route path="/pedido" element={<Pedido />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/cont" element={<Contato />} />

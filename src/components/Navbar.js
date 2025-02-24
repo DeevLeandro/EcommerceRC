@@ -23,7 +23,7 @@ export default function Navbar() {
   const [isLoading, setIsLoading] = useState(false); // Estado de carregamento
   const { searchTerm, setSearchTerm } = usePesquisa();
   const { produtos } = useCart();
-  const { temCadastro } = useCadastro(); // Usando o contexto
+  const { temCadastro, nomeCliente } = useCadastro();
   const navigate = useNavigate();
 
   const handleSearch = () => {
@@ -53,7 +53,7 @@ export default function Navbar() {
       <div className="inner-content">
         <Link to="/" onClick={handleHomeClick}>
           <h1 className="logo">
-            +<span>RCHospitalar</span>
+          +<span>RCHospitalar</span>
           </h1>
         </Link>
         <nav className={`${showMenu && "show"}`}>
@@ -83,6 +83,11 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
+            <Link to="/pedido"> 
+            <FontAwesomeIcon icon={faBox} className="fa-icon" />Pedidos
+            </Link>
+            </li>
+            <li>
               <Link to="/cont">
                 <FontAwesomeIcon icon={faPhone} className="fa-icon" /> Contato
               </Link>
@@ -105,17 +110,6 @@ export default function Navbar() {
               aria-label="Buscar"
             />
           </div>
-          <button>
-            <Link to="/login">
-              <FontAwesomeIcon
-                icon={faUserCircle}
-                className={`fa-icon ${
-                  temCadastro ? "icon-verde" : "icon-cinza"
-                }`}
-              />{" "}
-            </Link>
-          </button>
-
           <button
             className="Shopping-Cart"
             onClick={() => setShowCart(!showCart)}
@@ -128,6 +122,20 @@ export default function Navbar() {
           </button>
 
           {showCart && <Listacarinho />}
+          
+          <button>
+            <Link to="/login">
+             <FontAwesomeIcon
+               icon={faUserCircle}
+                className={`fa-icon ${temCadastro ? "icon-verde" : "icon-cinza"}`}
+                />
+               {temCadastro && nomeCliente && (
+                <span className="nome-cliente" style={{ marginLeft: "8px" }}>
+                {nomeCliente.split(" ")[0]} {/* Exibe somente o primeiro nome */}
+                </span>
+                 )}
+             </Link>
+          </button>
 
           <button
             className="menu-button"

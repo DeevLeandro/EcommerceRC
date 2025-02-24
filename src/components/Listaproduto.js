@@ -7,6 +7,7 @@ export default function ListaProduto({ produto }) {
   const { searchTerm } = usePesquisa();
   const produtos = Array.isArray(produto) ? produto : [];
   const [categoriaSelecionada, setCategoriaSelecionada] = useState(null);
+  
 
   // Filtra os produtos com base na categoria selecionada
   const produtosFiltradosPorCategoria = categoriaSelecionada
@@ -37,7 +38,8 @@ export default function ListaProduto({ produto }) {
               estoque={item.Qtde}
               image1={item.Fotos?.[0]?.Caminho}
               image2={item.Fotos?.[1]?.Caminho}
-              categorias={item.Categorias} // Passa as categorias para o Produto
+              categorias={item.Categorias}
+              promocao={item.Promocao} // Passa as categorias para o Produto
             />
           ))
         ) : (

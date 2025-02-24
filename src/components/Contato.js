@@ -34,7 +34,7 @@ export default function Contato() {
     setFormEnviado(false);
   };
 
-  const endereco = "Av rio clado, Montes Claros de Goiás 76255000";
+  const endereco = "Av rio claro, Montes Claros de Goiás 76255000";
   const urlMaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(endereco)}`;
 
   const telefone = "(62)99802-2336";

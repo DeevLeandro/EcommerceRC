@@ -4,6 +4,7 @@
   margin: 0;
 }
 
+
 :root {
   --primeira-cor: #f80;
   --seconda-cor: #00498d;
@@ -42,17 +43,22 @@ input[type="search"] {
 /* NAV */
 
 .nav {
-  
   background: linear-gradient(to right, #ffffff, #cde4ff);
   padding: 1rem;
   position: sticky;
   top: 0;
   left: 0;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   border-radius: 8px;
   z-index: 100;
-  font-size: 18px; /* Aumenta o tamanho da fonte do menu */
+  font-size: 18px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  color: white; /* Garante contraste */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease-in-out;
 }
+
+
 
 .nav .inner-content {
   display: flex;
@@ -66,11 +72,15 @@ input[type="search"] {
 
 /* LOGO */
 .logo {
+ 
+  font-family: 'Rajdhani', sans-serif;
+  text-transform: uppercase;
   color: red;
   font-weight: bold;
-  font-size: 2rem; /* Tamanho aumentado para a logo */
+  font-size: 2.5rem; /* Tamanho aumentado para a logo */
   display: flex;
   align-items: center;
+  margin-left: 3.5rem;
 }
 
 .logo span {
@@ -83,7 +93,7 @@ input[type="search"] {
 }
 
 
-.logo:hover span {
+.logo:hover {
   color: #4a90e2; /* Mudança de cor ao passar o mouse */
   transform: scale(1.05); /* Leve aumento para destacar */
 }
@@ -100,6 +110,7 @@ nav ul li {
   padding: 5px;
   transition: background-color 0.3s ease, transform 0.3s ease;
   font-weight: bolder;
+  margin-right: 0.5rem;
 }
 
 /* Estilo do link para remover sublinhado e ajustar cor inicial */
@@ -181,6 +192,7 @@ nav ul li:hover a {
 .search-input-container input {
   width: 150px; /* Diminui a largura do campo de pesquisa */
   border: none;
+  font-weight: bold;
   outline: none;
   background-color: transparent;
 }
@@ -280,7 +292,11 @@ header .banner-slide .inner-content {
   background: linear-gradient(135deg, #87CEEB, #4a90e2);
   overflow: hidden;
   animation: fadeIn 1s ease-in-out;
+  box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.3);
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease-in-out;
 }
+
 
 header .banner-slide .left-side {
   color: #fff;
@@ -417,11 +433,30 @@ header .banner-slide .right-side img:hover {
   .menu-button {
     display: inline;
   }
+  
+  .logo {
+    font-size: 1.2rem; /* Reduz o tamanho da logo */
+    margin-left: 0; /* Ajusta a margem para melhor alinhamento */
+  }
+
+  .logo span {
+    font-size: 1rem; /* Diminui o tamanho do texto secundário */
+  }
+
+
 }
 
 @media (max-width: 580px) {
   .search-input-container {
-    display: none !important;
+    display: flex !important; /* Garante que ele seja visível */
+    width: 100%; /* Ocupa toda a largura disponível */
+    justify-content: center; /* Centraliza o conteúdo */
+    margin-top: 10px; /* Dá um espaço entre os elementos */
+  }
+
+  .search-input-container input {
+    width: 100%; /* Faz o input se expandir corretamente */
+    max-width: 300px; /* Define um tamanho máximo */
   }
 
   /* Ajusta a altura do header para o tamanho da imagem */
@@ -429,6 +464,16 @@ header .banner-slide .right-side img:hover {
     height: auto; /* Altura se adapta automaticamente à imagem */
     padding: 0;
   }
+
+  .logo {
+    font-size: 1.2rem; /* Reduz o tamanho da logo */
+    margin-left: 0; /* Ajusta a margem para melhor alinhamento */
+  }
+
+  .logo span {
+    font-size: 1rem; /* Diminui o tamanho do texto secundário */
+  }  
+
 }
 
 /* Responsividade para o header e conteúdo */
@@ -577,7 +622,7 @@ header .banner-slide .right-side img:hover {
 .selecao-titulo .underline {
   width: 80px;
   height: 3px;
-  background-color: #87CEEB;;
+  background-color: #87CEEB;
   margin: 0 auto 1rem auto; /* Centraliza */
   border-radius: 1.5px; /* Deixa a linha mais elegante */
 }
@@ -635,7 +680,6 @@ header .banner-slide .right-side img:hover {
   margin-bottom: 0.2rem;
 }
 
-
 .Lista .rate {
   display: flex;
   gap: 5px; /* Espaçamento entre as estrelas */
@@ -655,6 +699,20 @@ header .banner-slide .right-side img:hover {
 }
 
 
+/* Estiliza o preço original (riscado) */
+.Lista .old-price {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+/* Estiliza o novo preço promocional */
+.new-price {
+  color: #d9534f;
+  font-size: 18px;
+  font-weight: bold;
+}
 
 
 /* Botões de ação dos produtos */
@@ -717,6 +775,7 @@ header .banner-slide .right-side img:hover {
   border-radius: 10px;
   background-color: var(--segundopreto);
   color: #fff;
+  font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -728,7 +787,7 @@ header .banner-slide .right-side img:hover {
 }
 
 .pagination-button:hover:not(:disabled) {
-  background-color: var(--corpreta);
+  background-color: #005f73;
 }
 
 .pagination span {
@@ -774,81 +833,6 @@ header .banner-slide .right-side img:hover {
   }
 }
 
-/* Menu categorias abaixo do navbar */
-.menu-categorias {
-  background-color: #34495e; /* Cor de fundo escura, mais suave */
-  padding: 8px 20px; 
-  position: fixed;
-  top: 60px; /* Ajuste para ficar logo abaixo do navbar */
-  left: 0;
-  width: 100%;
-  z-index: 999; /* Fica abaixo do navbar, mas ainda sobre o conteúdo */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
-}
-
-/* Lista de categorias */
-.menu-categorias ul {
-  display: flex;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  justify-content: center; /* Itens centralizados */
-  align-items: center;
-}
-
-/* Itens da lista */
-.menu-categorias ul li {
-  margin: 0 20px;
-  padding: 8px 15px;
-  display: flex;
-  align-items: center;
-  color: #ecf0f1; /* Cor do texto */
-  cursor: pointer;
-  font-size: 1.1rem;
-  border-radius: 4px;
-  transition: all 0.3s ease-in-out;
-}
-
-/* Efeito de hover */
-.menu-categorias ul li:hover {
-  background-color: #1abc9c; /* Cor suave para o hover */
-  transform: translateY(-3px); /* Efeito de elevar o item */
-}
-
-/* Categoria selecionada */
-.menu-categorias ul li.selected {
-  background-color: #2980b9; /* Azul para a categoria selecionada */
-  color: #ffffff;
-  font-weight: bold;
-}
-
-/* Ícones ao lado do nome da categoria */
-.menu-categorias ul li svg {
-  margin-right: 10px; /* Espaçamento entre o ícone e o texto */
-  font-size: 1.3rem; /* Aumenta o tamanho do ícone */
-}
-
-/* Responsividade: Ajustes para telas pequenas */
-@media (max-width: 768px) {
-  .menu-categorias {
-    top: 50px; /* Ajusta a distância do navbar em telas menores */
-    padding: 8px;
-  }
-
-  .menu-categorias ul {
-    flex-direction: column; /* Itens ficam empilhados verticalmente */
-    align-items: stretch; /* Ocupa a largura toda */
-  }
-
-  .menu-categorias ul li {
-    margin: 5px 0;
-    padding: 10px 0;
-    font-size: 1.2rem;
-    text-align: center; /* Centraliza o texto */
-  }
-}
-/* fim menu categoria */
-
 
 /* inicio sessao exclusiva */
 .selecao-titulo h3 {
@@ -856,7 +840,7 @@ header .banner-slide .right-side img:hover {
   font-size: 2rem;
   color: #000080; /* Azul-marinho */
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .selecao-titulo .underline {
@@ -869,7 +853,7 @@ header .banner-slide .right-side img:hover {
 /* final lista produto */
 
 .sessao-exclusiva {
-  background: linear-gradient(135deg, #87CEEB, #4a90e2);
+  background:linear-gradient(135deg, #87CEEB, #4a90e2);
   width: 100vw;
   margin-left: calc((100vw - 100%) / -2);
   padding: 5rem 1rem;
@@ -919,7 +903,7 @@ header .banner-slide .right-side img:hover {
 }
 
 .btnveragora1 {
-  background-color:var(--segundopreto);
+  background-color: var(--segundopreto);
   padding: 0.8rem 1rem;
   border-radius: 8px;
   transition: all 0.3s ease;
@@ -1089,6 +1073,16 @@ footer .copyright {
   scrollbar-width: none;
 }
 
+.sidebar-cart .total-container{
+color: black;
+margin-top: 1rem;
+}
+
+.sidebar-cart .lista-produto-carinho{
+ color: black;
+ 
+}
+
 .sidebar-cart::-webkit-scrollbar {
   display: none;
 }
@@ -1232,8 +1226,11 @@ footer .copyright {
   padding: 0.8rem;
   background-color: var(--segundopreto);
   color: #fff;
+  font-weight: bold;
   border-radius: 8px;
   font-size: 1rem;
+  margin-top: 1rem;
+  margin-left: 7rem;
   transition: all 0.2s;
 }
 
@@ -1389,6 +1386,7 @@ footer .copyright {
   background-color: #5C6BC0;
   color: white;
   border: none;
+  font-weight: bold;
   padding: 12px 20px;
   font-size: 14px;
   border-radius: 8px;
@@ -1460,13 +1458,9 @@ footer .copyright {
 .pagamento-finalizar-compra-btn:hover {
   background-color: #0d6c89;
 }
-
 /* Fim Pagamento */
 
-
-
 /* configura cartao */
-
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -1541,8 +1535,6 @@ footer .copyright {
 .cancel-button:hover {
   background: #c82333;
 }
-
-
 
 /* fim configura cartao */
 
@@ -1705,9 +1697,7 @@ footer .copyright {
     font-size: 12px;
   }
 }
-
 /* Estilo geral da página */
-
 
 /* Efeito ao passar o mouse sobre o botão */
 .registro button:hover {
@@ -1764,6 +1754,7 @@ footer .copyright {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   margin-top: 20px;
+  font-weight: bold;
 }
 
 /* Título do registro */
@@ -1805,6 +1796,7 @@ footer .copyright {
   padding: 10px;
   background-color: #1e3c72; /* Azul marinho */
   color: #fff;
+  font-weight: bold;
   border: none;
   border-radius: 5px;
   font-size: 16px;
@@ -1924,7 +1916,7 @@ footer .copyright {
   padding: 12px 20px;
   font-size: 16px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -2057,12 +2049,13 @@ footer .copyright {
 .sobre-nos {
   text-align: center;
   padding: 3rem 1.5rem;
-  background: linear-gradient(to right, hsl(206, 66%, 88%), #60a9fc); 
+  background: linear-gradient(to right, hsl(206, 66%, 88%), #60a9fc);
   color: #fff;
-  font-family: "Arial", sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   border-radius: 10px; /* Bordas arredondadas no container */
   margin-top: 3rem; /* Distância do topo */
   overflow: hidden; /* Previne conteúdos extras visíveis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 .texto-sobre-nos h1 {
@@ -2075,8 +2068,8 @@ footer .copyright {
 .texto-sobre-nos h2 {
   font-size: 2.2rem;
   color: #fff; /* Cor para o subtítulo */
+  font-weight: bold;
   margin-bottom: 1.5rem;
-  font-weight: normal;
 }
 
 .texto-sobre-nos p {
@@ -2086,12 +2079,18 @@ footer .copyright {
   animation: slide-up 1.2s ease-out; /* Animação de subida */
 }
 
+.icone {
+  font-size: 3.5rem; /* Ícones maiores */
+  color: black; /* Ícones pretos */
+  margin-right: 10px;
+}
+
 .diferenciais {
   list-style-type: none;
   padding-left: 0;
   margin-top: 2rem;
   font-size: 1.2rem;
-  text-align:  center;
+  text-align: center;
 }
 
 .diferenciais li {
@@ -2120,7 +2119,7 @@ footer .copyright {
 .informacoes-adicionais p {
   font-size: 1.1rem;
   margin-top: 1rem;
-  color:  var(--corpreta);
+  color: var(--corpreta);
 }
 
 .informacoes-adicionais strong {
@@ -2170,71 +2169,103 @@ footer .copyright {
 
 /* Final Sobre Nos */
 
-/* Inicio Menu Categoria */
-.menu-categoria {
-  width: 100%;
-  display: flex;
-  justify-content: center; /* Centraliza o menu */
-  align-items: center; /* Alinha os itens verticalmente */
-  padding: 15px 0;
-  margin: 20px 0;
-  position: relative;
-  border-radius: 10px;
- 
+/* Botão para abrir o menu */
+.menu-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: var(--segundopreto);
+  font-weight: bold;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 1001;
+  transition: 0.3s;
 }
 
+.menu-toggle:hover {
+  background: black;
+}
+
+/* Estilizando o menu lateral */
+.menu-categoria {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 85px;
+  left: -250px; /* Inicia escondido */
+  background: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+  padding-top: 20px;
+  transition: all 0.3s ease-in-out;
+  overflow-y: auto; /* Adiciona barra de rolagem */
+  z-index: 1000;
+}
+
+/* Quando o menu estiver aberto */
+.menu-categoria.aberto {
+  left: 0;
+}
+
+/* Botão para fechar o menu */
+.fechar-menu {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Lista do menu */
 .menu-categoria ul {
-  display: flex;
-  gap: 20px;
-  list-style-type: none;
-  padding: 0;
+  list-style: none;
+  border-radius: 8px;
+  padding: 20px;
   margin: 0;
-  animation: slideUp 0.6s ease-out;
+  max-height: 80vh; /* Limita a altura da lista */
+  overflow-y: auto; /* Adiciona barra de rolagem apenas à lista */
 }
 
 .menu-categoria li {
-  display: flex;
-  align-items: center; /* Alinha o texto verticalmente */
-  justify-content: center; /* Centraliza o texto */
-  padding: 12px 24px;
-  background: var(--segundopreto); /* Fundo com gradiente nos botões */
-  color: #fff; /* Texto branco */
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 1rem; /* Tamanho da fonte ajustado */
-  font-weight: 600; /* Texto mais chamativo */
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra mais forte */
-  transform: translateY(10px);
-  opacity: 1; /* Mantém visível desde o início */
-  text-align: center; /* Centraliza o texto no botão */
+  transition: 0.3s;
 }
 
 .menu-categoria li:hover {
-  background: linear-gradient(45deg, #0096c7, #005f73); /* Gradiente mais claro no hover */
+  background: linear-gradient(45deg, #0096c7, #005f73);
   transform: translateY(-8px); /* Elevação mais pronunciada */
-  box-shadow: 0 8px 16px rgba(0, 149, 199, 0.3); /* Sombra mais intensa no hover */
+  box-shadow: 0 8px 16px rgba(0, 149, 199, 0.3);
 }
 
-.menu-categoria li:active {
-  transform: translateY(0); /* Remove animação quando clicar */
-  scale: 0.95; /* Leve redução de tamanho ao clicar */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduz a sombra ao clicar */
-}
-
-/* Efeito de entrada com animação */
-@keyframes slideUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
+/* Responsividade */
+@media (max-width: 768px) {
+  .menu-categoria {
+    width: 100%;
+    height: 100vh;
+    left: -100%; /* Esconde completamente no mobile */
   }
-  to {
-    transform: translateY(0);
-    opacity: 1;
+  .menu-categoria.aberto {
+    left: 0;
+  }
+  .menu-toggle {
+    top: 15px;
+    left: 15px;
+    padding: 8px 12px;
+    font-size: 14px;
   }
 }
 
-/* Fim Menu Categoria */
 
 .loading-container {
   position: fixed;
@@ -2352,6 +2383,7 @@ footer .copyright {
   padding: 0;
   width: 100%; /* Ocupa toda a largura */
   border-radius: 15px;
+  
 }
 
 /* Título */
@@ -2377,6 +2409,7 @@ footer .copyright {
   height: 400px; /* Altura fixa */
   object-fit: cover; /* Mantém a proporção e cobre o container */
   transition: transform 0.5s ease-in-out; /* Suavização */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Texto abaixo do mapa */
@@ -2435,5 +2468,124 @@ footer .copyright {
   }
 }
 
-
 /* Mapa fim */
+
+/* Estilos para o formulário de pagamento */
+.formade-credito {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Contêiner das opções de pagamento */
+.opcoes-pagamento {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Estilo dos botões */
+.btn-pagamento {
+  background-color: var(--segundopreto); /* Azul marinho */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-pagamento:hover {
+  background-color: #005f73; /* Azul mais escuro */
+}
+
+/* Estilo do parágrafo que exibe o método de pagamento escolhido */
+.metodo-selecionado {
+  font-size: 18px;
+  color: #333;
+  margin-top: 20px;
+}
+
+.limite-credito{
+font-size: 24px; 
+font-weight: bold;
+margin-top: 2rem; 
+}
+
+/* Pedido.css */
+.pedido-container {
+  max-width: 1000px; /* Aumentei o máximo para acomodar múltiplos pedidos */
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  display: flex; /* Define o container como flex */
+  flex-wrap: wrap; /* Permite que os pedidos se ajustem para novas linhas se necessário */
+  gap: 20px; /* Espaçamento entre os pedidos */
+}
+
+.pedido-container h2 {
+  color: #333;
+  margin-bottom: 12px;
+  width: 100%; /* Para garantir que o título ocupe toda a largura disponível */
+}
+
+.pedido-detalhes {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+  margin-bottom: 0.5rem;
+  flex: 1 0 45%; /* Isso garante que os pedidos ocupem 45% da largura do container */
+  box-sizing: border-box; /* Para incluir o padding na largura total */
+  min-width: 300px; /* Tamanho mínimo para que os pedidos não fiquem muito pequenos */
+}
+
+.pedido-detalhes p {
+  font-size: 16px;
+  margin: 8px 0;
+  color: #444;
+}
+
+.pedido-detalhes p strong {
+  color: black;
+  font-weight: bold;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.pedido-liberacao {
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.pedido-liberacao.analise {
+  color: #d39e00;
+  background: #fff3cd;
+}
+
+.pedido-liberacao.liberado {
+  color: #15aa38;
+  background: #d4edda;
+}
+
+.pedido-carregando {
+  font-size: 18px;
+  color: #888;
+  margin-top: 20px;
+}

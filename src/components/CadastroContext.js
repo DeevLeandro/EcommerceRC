@@ -1,25 +1,40 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 
-// Criando o contexto
 const CadastroContext = createContext();
 
 export const CadastroProvider = ({ children }) => {
-  const [temCadastro, setTemCadastro] = useState(() => {
-    // Inicializa como `false` sempre que a página for recarregada
-    return false;
-  });
+  const [temCadastro, setTemCadastro] = useState(false);
+  const [nomeCliente, setNomeCliente] = useState("");
+  const [formasPagamento, setFormasPagamento] = useState(null);
+  const [ValorCredito, setValorCredito] = useState(null);
 
   useEffect(() => {
-    // Removendo informações do localStorage no carregamento inicial
     localStorage.removeItem("temCadastro");
+    localStorage.removeItem("nomeCliente");
   }, []);
 
   return (
-    <CadastroContext.Provider value={{ temCadastro, setTemCadastro }}>
+    <CadastroContext.Provider
+      value={{
+        temCadastro,
+        setTemCadastro,
+        nomeCliente,
+        setNomeCliente,
+        formasPagamento,
+        setFormasPagamento,
+        ValorCredito,
+        setValorCredito,
+      }}
+    >
       {children}
     </CadastroContext.Provider>
   );
 };
 
-// Hook para usar o contexto
-export const useCadastro = () => useContext(CadastroContext);
+export const useCadastro = () => {
+  const context = useContext(CadastroContext);
+  if (!context) {
+    throw new Error("useCadastro deve ser usado dentro do CadastroProvider");
+  }
+  return context;
+};

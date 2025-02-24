@@ -1,70 +1,80 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { resolvePath, useNavigate } from "react-router-dom";
 import { useCadastro } from "./CadastroContext";
 import { useTipoCliente } from "./PrecoContext";
 
 export default function Login() {
   const [cpf, setCpf] = useState("");
-  const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
   const [mensagem, setMensagem] = useState("");
-  const [mostrarSenha, setMostrarSenha] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { setTemCadastro } = useCadastro();
+  const { setTemCadastro, setNomeCliente, setFormasPagamento, setValorCredito } = useCadastro();
   const { setTipoCliente } = useTipoCliente();
 
   const limparCPF = (cpf) => cpf.replace(/\D/g, "");
+
+  const validarCPF = (cpf) => cpf && cpf.length >= 11; // Validação básica
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setErro("");
     setMensagem("");
-    setLoading(true);
 
     const cpfLimpo = limparCPF(cpf);
 
-    const config = {
-      method: "get",
-      maxBodyLength: Infinity,
-      url: "https://equilibrioapperp.pontalsistemas.com.br/serverecommerce/ConsultarCadastro",
-      headers: {
-        "X-Embarcadero-App-Secret": "DE1BA56B-43C5-469D-9BD2-4EB146EB8473",
-        "Content-Type": "application/json",
-      },
-      params: {
-        Token: "LOF2YBFRRPK5SO44TWQA",
-        Grupo: "231",
-        Empresa: "371",
-        CNPJCPF: cpfLimpo,
-      },
-    };
+    if (!validarCPF(cpfLimpo)) {
+      setErro("Digite um CPF/CNPJ válido.");
+      return;
+    }
 
+    setLoading(true);
     try {
-      const response = await axios.request(config);
+      const response = await axios.get(
+        "https://equilibrioapperp.pontalsistemas.com.br/serverecommerce/ConsultarCadastro",
+        {
+          headers: {
+            "X-Embarcadero-App-Secret": "DE1BA56B-43C5-469D-9BD2-4EB146EB8473",
+            "Content-Type": "application/json",
+          },
+          params: {
+            Token: "LOF2YBFRRPK5SO44TWQA",
+            Grupo: "231",
+            Empresa: "371",
+            CNPJCPF: cpfLimpo,
+          },
+        }
+      );
 
-      if (response.data && response.data.ID) {
+      // console.log("Resposta da API:", response.data);
+
+      if (response.data?.ID) {
         setMensagem("Você já possui cadastro.");
         setTemCadastro(true);
         setTipoCliente(response.data.TipoCliente);
+        setNomeCliente(response.data.Nome);
+        setValorCredito(response.data.ValorCredito);
+        setFormasPagamento({
+          boleto: response.data.Boleto,
+          CartaoCredito: response.data.CartaoCredito,
+          cartaoNaoPresencial: response.data.CartaoNaoPresencial,
+          carteira: response.data.Carteira,
+          cheque: response.data.Cheque,
+          correntista: response.data.Correntista,
+          deposito: response.data.Despito,
+          pixCredito: response.data.PixCredito,
+        });
         localStorage.setItem("userID", response.data.ID);
         navigate("/");
       } else {
         setErro("CPF/CNPJ Não Encontrado.");
       }
-      console.log("Resposta da API:", response.data);
     } catch (error) {
-      setErro("Erro ao verificar cadastro. Tente novamente.");
+      setErro("Erro ao verificar cadastro. Por favor, tente novamente.");
     } finally {
       setLoading(false);
     }
-  };
-
-  const irParaCadastro = () => {
-    navigate("/registro");
   };
 
   return (
@@ -80,14 +90,15 @@ export default function Login() {
             placeholder="CPF ou CNPJ"
             value={cpf}
             onChange={(e) => setCpf(e.target.value)}
+            disabled={loading}
           />
           <button className="login-button" type="submit" disabled={loading}>
             {loading ? "Carregando..." : "Entrar"}
           </button>
         </form>
-        <button className="go-to-cadastro" onClick={irParaCadastro}>
-         <p>Não tem uma conta?</p> Cadastre-se
-          </button>
+        <button className="go-to-cadastro" onClick={() => navigate("/registro")}>
+          <p>Não tem uma conta?</p> Cadastre-se
+        </button>
       </div>
     </div>
   );

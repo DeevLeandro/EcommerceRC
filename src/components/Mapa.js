@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 
 const Mapa = () => {
-  const endereco = "Av rio clado, Montes Claros de Goiás 76255000";
+  const endereco = "Av rio claro, Montes Claros de Goiás 76255000";
   const [imageStyle, setImageStyle] = useState({});
 
   // Movimento suave da imagem
