@@ -31,7 +31,7 @@ export default function SobreNos() {
       {/* Informações adicionais */}
       <div className="informacoes-adicionais">
         <p>
-          📍 <strong>Endereço:</strong> Av rio clado, Montes Claros de Goiás 76255000
+          📍 <strong>Endereço:</strong> Av rio claro, Montes Claros de Goiás 76255000
         </p>
         <p>
           🏢 <strong>Empresa:</strong> RCHospitalar
