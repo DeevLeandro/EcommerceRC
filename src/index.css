@@ -1393,6 +1393,38 @@ margin-top: 1rem;
   background-color: #3f4f96;
 }
 
+.qr-code-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 2rem;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+}
+
+.qr-code-container h3 {
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: #333;
+}
+
+.qr-code-container p {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #666;
+}
+
+.qr-code-container canvas {
+  margin: 10px 0;
+}
+
 .pagamento-metodos {
   margin: 20px 0;
   padding: 20px;
