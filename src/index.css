@@ -1366,6 +1366,12 @@ margin-top: 1rem;
   background-color: #fdfdfd;
 }
 
+.pagamento-retirar-loja{
+  font-size: 18px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.7rem;  
+}
+
 .pagamento-buttons-container {
   display: flex;
   gap: 15px;

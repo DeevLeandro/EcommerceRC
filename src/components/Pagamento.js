@@ -9,7 +9,6 @@ import { QRCodeCanvas } from "qrcode.react";
 
 export default function Pagamento() {
   const { produtos, total, clearCart } = useCart();
-
   const [cepDestino, setCepDestino] = useState("");
   const [enderecoEntrega, setEnderecoEntrega] = useState("");
   const [pontoReferencia, setPontoReferencia] = useState("");
@@ -23,8 +22,10 @@ export default function Pagamento() {
   const [contador, setContador] = useState(60);
   const [qrCodeBase64, setQrCodeBase64] = useState(""); // Estado para armazenar o QR Code
   const [paymentId, setPaymentId] = useState(null);
+  const [mostrarCep, setMostrarCep] = useState(true); // Estado para controlar a visibilidade do CEP
+  const [retirarNaLoja, setRetirarNaLoja] = useState(false);
+  const [cepDesabilitado, setCepDesabilitado] = useState(false); // Estado para desabilitar o campo
   const navigate = useNavigate();
-
   const [idPessoa, setIdPessoa] = useState(localStorage.getItem("userID") || "215381");
 
   useEffect(() => {
@@ -48,24 +49,21 @@ export default function Pagamento() {
     return () => clearInterval(timer); // Limpa o timer quando o componente é desmontado ou quando o pagamento é confirmado
   }, [qrCodeBase64, contador, pagamentoConfirmado]);
 
-
   const enviarPagamentoPix = async () => {
     try {
-      const response = await axios.post("http://177.21.218.2:8080/ServerEcommerce/MercadoPago", {
+      const response = await axios.post("https://equilibrioapperp.pontalsistemas.com.br/ServerEcommerce/MercadoPago", {
         Grupo: "231",
         Empresa: "371",
         Pessoa: idPessoa,
         ChaveAPI:"APP_USR-3331498176798594-050418-9f8efad230d69a288bebac21b02afefa-761499083",
-        Valor: total.toFixed(2).replace(".", ","), 
+        Valor: total.toFixed(2).replace(".", ","),
       }, {
         headers: {
           "X-Embarcadero-App-Secret": "DE1BA56B-43C5-469D-9BD2-4EB146EB8473",
           "Content-Type": "application/json",
         },
       });
-
-      console.log("Resposta da API:", response.data);
-      
+      // console.log("Resposta da API:", response.data);     
       if (response.data && response.data.CHAVEPAGAMENTO) {
         setQrCodeBase64(response.data.CHAVEPAGAMENTO);
       } else {
@@ -91,8 +89,7 @@ const verificarPagamento = async () => {
       console.error("Erro: payment_id não definido.");
       return;
     }
-
-    const response = await axios.post("http://177.21.218.2:8080/ServerEcommerce/StatusPagamento", {
+    const response = await axios.post("https://equilibrioapperp.pontalsistemas.com.br/ServerEcommerce/StatusPagamento", {
       payment_id: paymentId, // Usa o payment_id capturado
       ChaveAPI:"APP_USR-3331498176798594-050418-9f8efad230d69a288bebac21b02afefa-761499083",
     }, {
@@ -101,9 +98,7 @@ const verificarPagamento = async () => {
         "Content-Type": "application/json",
       },
     });
-
-    console.log("Resposta da API:", response.data);
-
+    // console.log("Resposta da API:", response.data);
     // Verificar status do pagamento
     if (response.data.Status === "approved") { // Corrigido para "Status" com "S" maiúsculo
       setPagamentoConfirmado(true);
@@ -117,10 +112,6 @@ const verificarPagamento = async () => {
     console.error("Erro ao verificar pagamento:", error);
   }
 };
-
-
-
-
 // Função para calcular o peso total
  const calcularPesoTotal = () => {
   return produtos.reduce((total, produto) => {
@@ -129,23 +120,26 @@ const verificarPagamento = async () => {
   }, 0);
 
 };
-
   // Função para fechar o modal
   const handleClose = () => {
     setMostrarConfigurarCartao(false);
-  };
-  
+  }; 
    // Função para fechar o modal
   const handlefechar = () => {
     setMostrarCreditoLoja(false);
   };
   
+  const handleRetirarNaLoja = (event) => {
+    const checked = event.target.checked;
+    setRetirarNaLoja(checked);
+    setMostrarCep(!checked); // Esconde o campo de CEP
+    setCepDesabilitado(checked); // Desabilita o campo de CEP se "Retirar na Loja" for marcado
+  };
   // Função para salvar o cartão
   const handleSave = (dadosCartao) => {
     console.log("Cartão salvo:", dadosCartao);
     setMostrarConfigurarCartao(false);
   };
-
     // Função para salvar o pagamento
     const handleSalvarpagamento = (pagamento) => {
       console.log("salvar pagamento:", pagamento);
@@ -156,7 +150,6 @@ const verificarPagamento = async () => {
       setCodigoPagamento(codigo); // Armazena o código de pagamento selecionado
     };
      
-
 const calcularQtdeVolume = () => {
   return produtos.reduce((total, produto) => {
     return total + produto.quantidade; // Soma a quantidade de cada produto no carrinho
@@ -165,11 +158,17 @@ const calcularQtdeVolume = () => {
 
   const finalizarCompra = async () => {
     
-   // Verificar se o CEP foi preenchido
-  //  if (!cepDestino || cepDestino.replace(/[^\d]/g, "").length !== 8) {
-  //   alert("Por favor, insira um CEP válido e calcule o frete antes de finalizar a compra.");
-  //   return;
-  // }
+// Verifica se a opção de retirar na loja foi escolhida
+if (retirarNaLoja) {
+  // Se for retirar na loja, não precisamos do CEP nem de calcular o frete
+  console.log("Produto retirado na loja");
+} else {
+  // Verificar se o CEP foi preenchido
+  if (!cepDestino || cepDestino.replace(/[^\d]/g, "").length !== 8) {
+    alert("Por favor, insira um CEP válido e calcule o frete antes de finalizar a compra.");
+    return;
+  }
+}
 
   if (!codigoPagamento) {
     alert("Selecione um método de pagamento antes de finalizar a compra.");
@@ -182,7 +181,6 @@ const calcularQtdeVolume = () => {
       return; // Não prossegue com a finalização da compra até o pagamento ser confirmado
     }
   
-  
   console.log("Código do pagamento selecionado:", codigoPagamento);
   
     try {
@@ -191,7 +189,6 @@ const calcularQtdeVolume = () => {
         const desconto = produto.desconto || 0; // Adiciona o desconto, caso exista
         const totalItem = (produto.preco - desconto) * produto.quantidade;
         
-
         return {
           IDProduto: produto.id,
           Qtde: produto.quantidade,
@@ -244,16 +241,6 @@ const calcularQtdeVolume = () => {
               Parcela: "1/1",
               vParcela: total.toFixed(2).replace(".", ","),
             };
-          case 5: // Cheque
-            return {
-              TipoPg: codigoPagamento.toString(),
-              NSU: "98938378",
-              IDForPg: "484", // ID de forma de pagamento específico para Cheque
-              Qtde: "1",
-              DtVencimento: new Date().toISOString().split("T")[0],
-              Parcela: "1/1",
-              vParcela: total.toFixed(2).replace(".", ","),
-            };
           case 7: // Pix
             return {
               TipoPg: codigoPagamento.toString(),
@@ -279,16 +266,6 @@ const calcularQtdeVolume = () => {
               TipoPg: codigoPagamento.toString(),
               NSU: "98938378",
               IDForPg: "487", // ID de forma de pagamento específico para Crédito
-              Qtde: "1",
-              DtVencimento: new Date().toISOString().split("T")[0],
-              Parcela: "1/1",
-              vParcela: total.toFixed(2).replace(".", ","),
-            };
-          case 13: // Correntista
-            return {
-              TipoPg: codigoPagamento.toString(),
-              NSU: "98938378",
-              IDForPg: "488", // ID de forma de pagamento específico para Correntista
               Qtde: "1",
               DtVencimento: new Date().toISOString().split("T")[0],
               Parcela: "1/1",
@@ -370,75 +347,73 @@ const calcularQtdeVolume = () => {
     setMostrarCreditoLoja(metodo === "CreditoLoja");
   };
 
-
-  // const buscarEnderecoPorCep = async (cep) => {
-  //   const cepFormatado = cep.replace(/[^\d]/g, "");
-  //   if (cepFormatado.length === 8) {
-  //     try {
-  //       const response = await fetch(`https://viacep.com.br/ws/${cepFormatado}/json/`);
-  //       const data = await response.json();
-  //       if (data.erro) {
-  //         alert("CEP não encontrado.");
-  //       } else {
-  //         setEnderecoEntrega(`${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`);
-  //       }
-  //     } catch (error) {
-  //       console.error("Erro ao buscar o endereço:", error);
-  //       alert("Erro ao buscar o endereço. Tente novamente.");
-  //     }
-  //   } else {
-  //     alert("Por favor, insira um CEP válido.");
-  //   }
-  // };
+  const buscarEnderecoPorCep = async (cep) => {
+    const cepFormatado = cep.replace(/[^\d]/g, "");
+    if (cepFormatado.length === 8) {
+      try {
+        const response = await fetch(`https://viacep.com.br/ws/${cepFormatado}/json/`);
+        const data = await response.json();
+        if (data.erro) {
+          alert("CEP não encontrado.");
+        } else {
+          setEnderecoEntrega(`${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar o endereço:", error);
+        alert("Erro ao buscar o endereço. Tente novamente.");
+      }
+    } else {
+      alert("Por favor, insira um CEP válido.");
+    }
+  };
   
+  const calcularFrete = async () => {
+    if (!cepDestino || cepDestino.replace(/[^\d]/g, "").length !== 8) {
+      alert("Por favor, insira um CEP de destino válido.");
+      return;
+    }
 
-  // const calcularFrete = async () => {
-  //   if (!cepDestino || cepDestino.replace(/[^\d]/g, "").length !== 8) {
-  //     alert("Por favor, insira um CEP de destino válido.");
-  //     return;
-  //   }
-
-  //   const pesoTotal = calcularPesoTotal(); // Peso total calculado aqui
-  //   const qtdeVolume = calcularQtdeVolume(); // Calcula a quantidade total de volume
+    const pesoTotal = calcularPesoTotal(); // Peso total calculado aqui
+    const qtdeVolume = calcularQtdeVolume(); // Calcula a quantidade total de volume
         
-  //   try {
-  //     const config = {
-  //       method: "get",
-  //       url: "https://equilibrioapperp.pontalsistemas.com.br/ServerEcommerce/ConsultarFrete",
-  //       headers: {
-  //         "X-Embarcadero-App-Secret": "DE1BA56B-43C5-469D-9BD2-4EB146EB8473",
-  //         "Content-Type": "application/json",
-  //       },
-  //       params: {
-  //         Token: "54918616RFBA4R4990RA38CR7A0787D2FD3E",
-  //         CEPOrigem: "74356048",
-  //         CEPDestino: cepDestino.replace(/[^\d]/g, ""),
-  //         ValorNFe: total.toFixed(2).replace(".", ","),
-  //         QtdeVolume: qtdeVolume.toString(),
-  //         PesoBruto: pesoTotal.toFixed(2).replace(".", ","), // Peso total calculado
-  //         Comprimento: "0",
-  //         Altura: "0",
-  //         Largura: "0",
-  //         Diamentro: "0",
-  //       },
-  //     };
+    try {
+      const config = {
+        method: "get",
+        url: "https://equilibrioapperp.pontalsistemas.com.br/ServerEcommerce/ConsultarFrete",
+        headers: {
+          "X-Embarcadero-App-Secret": "DE1BA56B-43C5-469D-9BD2-4EB146EB8473",
+          "Content-Type": "application/json",
+        },
+        params: {
+          Token: "54918616RFBA4R4990RA38CR7A0787D2FD3E",
+          CEPOrigem: "74356048",
+          CEPDestino: cepDestino.replace(/[^\d]/g, ""),
+          ValorNFe: total.toFixed(2).replace(".", ","),
+          QtdeVolume: qtdeVolume.toString(),
+          PesoBruto: pesoTotal.toFixed(2).replace(".", ","), // Peso total calculado
+          Comprimento: "0",
+          Altura: "0",
+          Largura: "0",
+          Diamentro: "0",
+        },
+      };
 
-  //     const response = await axios.request(config);
-  //     const data = response.data;
+      const response = await axios.request(config);
+      const data = response.data;
 
-  //     console.log("Resposta completa da API de frete:", data);
+      console.log("Resposta completa da API de frete:", data);
 
-  //     const menorFrete = data.reduce((prev, curr) => {
-  //       return parseFloat(curr.Valor.replace(",", ".")) < parseFloat(prev.Valor.replace(",", ".")) ? curr : prev;
-  //     });
+      const menorFrete = data.reduce((prev, curr) => {
+        return parseFloat(curr.Valor.replace(",", ".")) < parseFloat(prev.Valor.replace(",", ".")) ? curr : prev;
+      });
 
-  //     setValorFrete(parseFloat(menorFrete.Valor.replace(",", ".")));
-  //     setPrazoEntrega(menorFrete.PrazoEntrega);
-  //   } catch (error) {
-  //     console.error("Erro ao calcular frete:", error);
-  //     alert("Erro ao calcular o frete. Tente novamente.");
-  //   }
-  // };
+      setValorFrete(parseFloat(menorFrete.Valor.replace(",", ".")));
+      setPrazoEntrega(menorFrete.PrazoEntrega);
+    } catch (error) {
+      console.error("Erro ao calcular frete:", error);
+      alert("Erro ao calcular o frete. Tente novamente.");
+    }
+  };
 
   return (
     <div className="pagamento-container">
@@ -473,37 +448,59 @@ const calcularQtdeVolume = () => {
 
         {/* Card de endereço */}
         <div className="pagamento-card">
-         {/* <h3 className="pagamento-card-title">Endereço de Entrega</h3>
-           <input
-            type="text"
-            placeholder="Digite o CEP de Destino"
-            value={cepDestino}
-            onChange={(e) => setCepDestino(e.target.value)}
-            className="pagamento-endereco-input"
-          />
-          
-           <textarea
-            value={enderecoEntrega}
-            onChange={(e) => setEnderecoEntrega(e.target.value)}
-            className="pagamento-endereco-textarea"
-            placeholder="Endereço de entrega"
-          />
-          <input
-            type="text"
-            placeholder="Ponto de Referência"
-            value={pontoReferencia}
-            onChange={(e) => setPontoReferencia(e.target.value)}
-            className="pagamento-endereco-input"
-          /> */}
-        </div>
-        <div className="pagamento-buttons-container">
-            {/* <button onClick={() => buscarEnderecoPorCep(cepDestino)} className="pagamento-buscar-cep-btn">
-              Buscar Endereço
-            </button> */}
-            {/* <button onClick={calcularFrete} className="pagamento-calcular-frete-btn">
-              Calcular Frete
-            </button> */}
+         <h3 className="pagamento-card-title">Endereço de Entrega</h3>
+         <div className="pagamento-retirar-loja">
+         <label>
+         <input
+  type="checkbox"
+  checked={retirarNaLoja}
+  onChange={handleRetirarNaLoja}
+/> Retirar na Loja
+         </label>
           </div>
+          {mostrarCep && (
+          <input
+           type="text"
+            placeholder="Digite o CEP de Destino"
+           value={cepDestino}
+           onChange={(e) => setCepDestino(e.target.value)}
+           disabled={cepDesabilitado}
+         className="pagamento-endereco-input"
+          />
+           )}
+          
+          {!retirarNaLoja && (
+  <>
+    <textarea
+      value={enderecoEntrega}
+      onChange={(e) => setEnderecoEntrega(e.target.value)}
+      className="pagamento-endereco-textarea"
+      placeholder="Endereço de entrega"
+    />
+    <input
+      type="text"
+      placeholder="Ponto de Referência"
+      value={pontoReferencia}
+      onChange={(e) => setPontoReferencia(e.target.value)}
+      className="pagamento-endereco-input"
+    />
+    <div className="pagamento-buttons-container">
+      <button
+        onClick={() => buscarEnderecoPorCep(cepDestino)}
+        className="pagamento-buscar-cep-btn"
+      >
+        Buscar Endereço
+      </button>
+      <button
+        onClick={calcularFrete}
+        className="pagamento-calcular-frete-btn"
+      >
+        Calcular Frete
+      </button>
+    </div>
+  </>
+)}
+      </div>
           
         {/* Card de métodos de pagamento */}
         <div className="pagamento-card">

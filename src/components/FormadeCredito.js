@@ -13,9 +13,7 @@ const FormadeCredito = ({ onClose, onSave, onPagamentoSelecionado }) => {
     "Boleto": 4,
     "CartaoDebito": 1,
     "Cartão de Crédito": 2,
-    "Pix": 7,
     "Carteira": 3,
-    "Cheque": 5,
     "Depósito": 10,
     "Credito": 12,
     "Correntista": 13,
@@ -26,10 +24,7 @@ const FormadeCredito = ({ onClose, onSave, onPagamentoSelecionado }) => {
     : [
         { key: "boleto", label: "Boleto" },
         { key: "CartaoCredito", label: "Cartão de Crédito" },
-        { key: "cartaoNaoPresencial", label: "Cartão Não Presencial" },
-        { key: "pixCredito", label: "Pix" },
         { key: "carteira", label: "Carteira" },
-        { key: "cheque", label: "Cheque" },
         { key: "correntista", label: "Correntista" },
         { key: "deposito", label: "Depósito" },
       ];
