@@ -112,6 +112,44 @@ const verificarPagamento = async () => {
     console.error("Erro ao verificar pagamento:", error);
   }
 };
+
+const enviarPagamentoBoleto = async () => {
+  try {
+    const response = await axios.post("http://177.21.218.2:8080/ServerEcommerce/MercadoPagoBoleto", {
+      Grupo: "231",
+      Empresa: "371",
+      Pessoa: idPessoa,
+      ChaveAPI: "APP_USR-1844850716547356-031014-cf6cc2eb5bd0555b4fbefac1cb798b0c-761499083",
+      Valor: total.toFixed(2).replace(".", ","),
+    }, {
+      headers: {
+        "X-Embarcadero-App-Secret": "DE1BA56B-43C5-469D-9BD2-4EB146EB8473",
+        "Content-Type": "application/json",
+      },
+    });
+
+    // console.log("Resposta da API:", response.data);
+
+    if (response.data && response.data.Boleto_URL) { // Corrigido para Boleto_URL
+      // Aqui você pode redirecionar o usuário para a URL do boleto ou exibir o boleto em uma nova janela
+      window.open(response.data.Boleto_URL, "_blank");
+    } else {
+      console.error("Erro: Boleto_URL não encontrado na resposta da API.");
+      alert("Erro ao processar o pagamento. Verifique os dados e tente novamente.");
+    }
+     
+    if (response.data && response.data.payment_id) {
+      setPaymentId(response.data.payment_id); // Salva o payment_id
+      finalizarCompra();
+    } else {
+      console.error("Erro: payment_id não encontrado na resposta da API.");
+    }
+  } catch (error) {
+    console.error("Erro ao enviar pagamento:", error);
+    alert("Erro ao processar o pagamento. Tente novamente mais tarde.");
+  }
+};
+
 // Função para calcular o peso total
  const calcularPesoTotal = () => {
   return produtos.reduce((total, produto) => {
@@ -173,6 +211,11 @@ if (retirarNaLoja) {
   if (!codigoPagamento) {
     alert("Selecione um método de pagamento antes de finalizar a compra.");
     return;
+  }
+    
+  if (codigoPagamento === 4) { // 4 é o código para Boleto
+    await enviarPagamentoBoleto();
+    return; // Não prossegue com a finalização da compra até o boleto ser gerado
   }
 
     // Se o método de pagamento for PIX, envia a requisição ao RadServer
@@ -341,10 +384,21 @@ if (retirarNaLoja) {
       alert("Essa forma de pagamento está disponível apenas para clientes logados.");
       return;
     }
-
+  
     setMetodoPagamento(metodo);
     setMostrarConfigurarCartao(metodo === "Cartao");
     setMostrarCreditoLoja(metodo === "CreditoLoja");
+  
+    // Definir o código de pagamento com base no método selecionado
+    if (metodo === "Boleto") {
+      setCodigoPagamento(4); // 4 é o código para Boleto
+    } else if (metodo === "Pix") {
+      setCodigoPagamento(7); // 7 é o código para PIX
+    } else if (metodo === "Cartao") {
+      setCodigoPagamento(2); // 2 é o código para Cartão de Crédito
+    } else if (metodo === "CreditoLoja") {
+      setCodigoPagamento(12); // 12 é o código para Crédito Loja
+    }
   };
 
   const buscarEnderecoPorCep = async (cep) => {
@@ -526,16 +580,16 @@ if (retirarNaLoja) {
                 onChange={() => handleMetodoPagamentoChange("Cartao")}
               />
               Cartão
+            </label>*/}
+           <label>
+             <input
+               type="radio"
+               name="metodoPagamento"
+               value="Boleto"
+               onChange={() => handleMetodoPagamentoChange("Boleto")}
+             />
+               Boleto
             </label>
-            <label>
-              <input
-                type="radio"
-                name="metodoPagamento"
-                value="Boleto"
-                onChange={() => handleMetodoPagamentoChange("Boleto")}
-              />
-              Boleto
-             </label>    */}
         <div>
           <label>
            <input
