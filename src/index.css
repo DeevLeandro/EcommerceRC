@@ -1399,6 +1399,20 @@ margin-top: 1rem;
   background-color: #3f4f96;
 }
 
+.copiar-pix-btn {
+  background-color: var(--seconda-cor);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.copiar-pix-btn:hover {
+  background-color: #005f73;
+}
+
 .qr-code-container {
   display: flex;
   flex-direction: column;

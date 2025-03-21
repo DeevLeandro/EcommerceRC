@@ -25,6 +25,7 @@ export default function Pagamento() {
   const [mostrarCep, setMostrarCep] = useState(true); // Estado para controlar a visibilidade do CEP
   const [retirarNaLoja, setRetirarNaLoja] = useState(false);
   const [cepDesabilitado, setCepDesabilitado] = useState(false); // Estado para desabilitar o campo
+  const [gerol, setGerol] = useState("0");
   const navigate = useNavigate();
   const [idPessoa, setIdPessoa] = useState(localStorage.getItem("userID") || "215381");
 
@@ -50,11 +51,13 @@ export default function Pagamento() {
   }, [qrCodeBase64, contador, pagamentoConfirmado]);
 
   const enviarPagamentoPix = async () => {
+    const produto = produtos[0]
     try {
       const response = await axios.post("https://equilibrioapperp.pontalsistemas.com.br/ServerEcommerce/MercadoPago", {
         Grupo: "231",
         Empresa: "371",
         Pessoa: idPessoa,
+        Produto: produto.id,
         ChaveAPI:"APP_USR-3331498176798594-050418-9f8efad230d69a288bebac21b02afefa-761499083",
         Valor: total.toFixed(2).replace(".", ","),
       }, {
@@ -63,7 +66,7 @@ export default function Pagamento() {
           "Content-Type": "application/json",
         },
       });
-      // console.log("Resposta da API:", response.data);     
+      console.log("Resposta da API:", response.data);     
       if (response.data && response.data.CHAVEPAGAMENTO) {
         setQrCodeBase64(response.data.CHAVEPAGAMENTO);
       } else {
@@ -113,6 +116,17 @@ const verificarPagamento = async () => {
   }
 };
 
+// Função para copiar o código PIX
+const copiarCodigoPix = async () => {
+  try {
+    await navigator.clipboard.writeText(qrCodeBase64); // Copia o código PIX
+    alert("Código PIX copiado para a área de transferência!"); // Feedback para o usuário
+  } catch (error) {
+    console.error("Erro ao copiar o código PIX:", error);
+    alert("Erro ao copiar o código PIX. Tente novamente.");
+  }
+};
+
 const enviarPagamentoBoleto = async () => {
   try {
     const response = await axios.post("http://177.21.218.2:8080/ServerEcommerce/MercadoPagoBoleto", {
@@ -128,21 +142,22 @@ const enviarPagamentoBoleto = async () => {
       },
     });
 
-    // console.log("Resposta da API:", response.data);
+    console.log("Resposta da API:", response.data);
 
-    if (response.data && response.data.Boleto_URL) { // Corrigido para Boleto_URL
-      // Aqui você pode redirecionar o usuário para a URL do boleto ou exibir o boleto em uma nova janela
-      window.open(response.data.Boleto_URL, "_blank");
+    if (response.data && response.data.Boleto_URL) {
+      // Abre o boleto em uma nova aba
+      const novaAba = window.open(response.data.Boleto_URL, "_blank");
+
+      // Verifica se a nova aba foi bloqueada pelo navegador
+      if (!novaAba || novaAba.closed || typeof novaAba.closed === "undefined") {
+        // Se a nova aba foi bloqueada, redireciona na mesma aba
+        window.location.href = response.data.Boleto_URL;
+      }
+
+      setGerol("1"); // Atualiza o estado gerol para indicar que o boleto foi gerado
     } else {
       console.error("Erro: Boleto_URL não encontrado na resposta da API.");
       alert("Erro ao processar o pagamento. Verifique os dados e tente novamente.");
-    }
-     
-    if (response.data && response.data.payment_id) {
-      setPaymentId(response.data.payment_id); // Salva o payment_id
-      finalizarCompra();
-    } else {
-      console.error("Erro: payment_id não encontrado na resposta da API.");
     }
   } catch (error) {
     console.error("Erro ao enviar pagamento:", error);
@@ -212,12 +227,7 @@ if (retirarNaLoja) {
     alert("Selecione um método de pagamento antes de finalizar a compra.");
     return;
   }
-    
-  if (codigoPagamento === 4) { // 4 é o código para Boleto
-    await enviarPagamentoBoleto();
-    return; // Não prossegue com a finalização da compra até o boleto ser gerado
-  }
-
+  
     // Se o método de pagamento for PIX, envia a requisição ao RadServer
     if (codigoPagamento === 7 && !pagamentoConfirmado) { // 7 é o código para PIX
       await enviarPagamentoPix();
@@ -362,10 +372,14 @@ if (retirarNaLoja) {
       if (response.data && response.data.Venda) {
         alert(`Compra finalizada com sucesso! ID da Venda: ${response.data.Venda}`);
         console.log("Resposta da API:", response.data);
-  
+         // Se o método de pagamento for Boleto, gera o boleto após a finalização da compra
+      if (codigoPagamento === 4) {
+        await enviarPagamentoBoleto();
+      }  
         // Zera o carrinho e redireciona para a tela inicial
         clearCart();
         navigate("/");
+        
       } else {
         // Corrigindo a referência ao erro
         const mensagemErro = response.data.erro || "Erro desconhecido"; // Alterado para 'response'
@@ -604,13 +618,22 @@ if (retirarNaLoja) {
        </div>
 
        {qrCodeBase64 && (
-        <div className="qr-code-container">
-           <h3>Escaneie o QR Code para pagar</h3>
-          <QRCodeCanvas value={qrCodeBase64} size={256} />
-          <p>Tempo restante: {contador} segundos</p>
-          {pagamentoConfirmado ? <p>Pagamento Confirmado!</p> : <p>Aguardando pagamento...</p>}
-        </div>
-      )}
+  <div className="qr-code-container">
+    <h3>Escaneie o QR Code para pagar</h3>
+    <QRCodeCanvas value={qrCodeBase64} size={256} />
+    <p>Tempo restante: {contador} segundos</p>
+    {pagamentoConfirmado ? (
+      <p>Pagamento Confirmado!</p>
+    ) : (
+      <>
+        <p>Aguardando pagamento...</p>
+        <button onClick={copiarCodigoPix} className="copiar-pix-btn">
+          Copiar Código PIX
+        </button>
+      </>
+    )}
+  </div>
+)}
 
             {metodoPagamento === "Cartão" &&  (
         <button onClick={() => setMostrarConfigurarCartao(true)}>
